@@ -1,0 +1,28 @@
+{
+  "name": "ctrip-vacation-build",
+  "version": "0.0.1",
+  "description": "build tools for ctrip.com vacation department web front-end group",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:peichao01/ctrip-vacation-build.git"
+  },
+  "keywords": [
+    "build",
+    "ctrip",
+    "vacation"
+  ],
+  "author": {
+    "name": "chao2",
+    "email": "i@peichao01.com"
+  },
+  "license": "BSD",
+  "dependencies": {
+    "commander":"~2.1.0",
+    "walk":"2.x",
+    "uglify-js":"~2.2.5"
+  }
+}
