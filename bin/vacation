@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+//console.log(__filename);
+//console.log(__dirname);
+//console.log(process.cwd());
+//console.log(process.argv);
+
+var commander = require('commander'),
+	walk = require('walk');
+
+commander
+	.version('0.0.1')
+	.Option('-C, --chdir <path>','change the working directory')
+	//.option('-c, --config <path>','set config path. defaults to ./deploy.conf')
+	//.option('-T, --no-tests','ignore test hook');
