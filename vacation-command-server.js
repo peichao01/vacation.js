@@ -5,6 +5,8 @@
 
 'use strict';
 
+var serverKernel = require('./lib/lib-server/server-kernel.js');
+
 exports.name = 'server';
 exports.usage = '<command> [options]';
 exports.desc = 'launch a Node.js server';
@@ -53,6 +55,7 @@ exports.register = function (commander) {
 			var conf = getConf();
 			switch (cmd) {
 				case 'start': 
+					serverKernel.start();
 					break;
 				case 'stop':
 					break;

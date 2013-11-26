@@ -23,8 +23,15 @@ vacation.cli.commander = null;
 
 // package.json
 vacation.cli.info = vacation.util.readJSON(__dirname + '/package.json');
-vacation.cli.config = vacation.util.getConfig(__dirname);
-console.log(vacation.cli.config);
+vacation.cli.config = vacation.util.merge({
+	server:{
+		port: 8080,
+		root: ''
+	}
+},vacation.util.getConfig(__dirname));
+vacation.cli.config.cmd_cwd = process.cwd();
+
+//console.log(vacation.cli.config);
 
 // output help info
 vacation.cli.help = function(){
