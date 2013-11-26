@@ -5,13 +5,13 @@
 
 'use strict';
 
-var vacation = module.exports = require('lib/vacation-kernel');
+var vacation = module.exports = require('./lib/vacation-kernel');
 
 var tools = ['build', 'server'];
 
-vacation.config.merge({
-	
-});
+//vacation.config.merge({
+//	
+//});
 
 // exports cli object
 vacation.cli = {};
@@ -23,10 +23,18 @@ vacation.cli.commander = null;
 
 // package.json
 vacation.cli.info = vacation.util.readJSON(__dirname + '/package.json');
+vacation.cli.config = vacation.util.getConfig(__dirname);
+console.log(vacation.cli.config);
 
 // output help info
 vacation.cli.help = function(){
-	var content = [],
+	var content = [
+			'',
+			'  Usage:  ' + vacation.cli.name + ' <command>',
+			'',
+			'  Command:',
+			''
+		],
 		prefix = 'vacation-command-',
 		prefixLen = prefix.length;
 
@@ -44,7 +52,7 @@ vacation.cli.help = function(){
 		if(name.indexOf(prefix) === 0){
 			name = name.substring(prefixLen);
 			var cmd = vacation.require('command', name);
-			name = fis.util.pad(cmd.name || name, 12);
+			name = vacation.util.pad(cmd.name || name, 12);
 			content.push('    ' + name + (cmd.desc || ''));
 		}
 	});
@@ -62,15 +70,9 @@ vacation.cli.help = function(){
 vacation.cli.version = function(){
 	var content = [
 		'',
-		'  v' + fis.cli.info.version,
-		'',
-		'  vvv       vvv  aaaaaa      cccccccc    aaaaaa      ttt       iii    oooooo    nnnnnnnnnn ',
-        '   vvv     vvv       aaa    ccccccccc        aaa tttttttttttt        ooo  ooo   nnnnnnnnnn ',
-        '    vvv   vvv  aaaaaaaaa   ccc         aaaaaaaaa tttttttttttt  iii  ooo    ooo  nnn    nnn ',
-        '     vvv vvv  aaa    aaa   ccc        aaa    aaa     ttt       iii  ooo    ooo  nnn    nnn ',
-        '      vvvvv   aaa    aaaaa cccccccccc aaa    aaaaa   tttttttt  iii   ooo  ooo   nnn    nnnn',
-        '       vvv     aaaaaaaaaaa  ccccccccc  aaaaaaaaaaa   tttttttt  iii    oooooo    nnn    nnnn'
+		'  v' + vacation.cli.info.version
 	].join('\n');
+	console.log(content);
 }; 
 
 function hasArgv(argv, search){
@@ -98,6 +100,7 @@ vacation.cli.run = function(argv){
 		// register command
 		var commander = vacation.cli.commander = require('commander');
 		var cmd = vacation.require('command', argv[2]);
+		//console.log(cmd);
 		cmd.register(
 			commander
 				.command(cmd.name || first)

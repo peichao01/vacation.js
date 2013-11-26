@@ -2,7 +2,7 @@
   "name": "ctrip-vacation-build",
   "version": "0.0.1",
   "description": "build tools for ctrip.com vacation department web front-end group",
-  "main": "index.js",
+  "main": "vacation.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

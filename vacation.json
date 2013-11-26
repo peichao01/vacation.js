@@ -1,0 +1,13 @@
+{
+	"file":{
+		"transport": true,
+		"transportText": true,
+		"concat": true,
+		"optimize": true,
+		"compileHandlebars": true
+	},
+	"server":{
+		"port":8080,
+		"root":"./"
+	}
+}
