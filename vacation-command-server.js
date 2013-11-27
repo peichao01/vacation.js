@@ -44,10 +44,10 @@ exports.register = function (commander) {
 	}
 	//console.log(vacation.project.getTempPath('www'));return;
 	commander
-		.option('-p, --port <int>', 'server listen port', parseInt, 8080)
-		.option('--root <path>', 'document root', getRoot, vacation.project.getTempPath('www'))
-		.option('--script <name>', 'the name of file that to config/expand the server', String)
-		//.option('--timeout <seconds>', 'start timeout', parseInt, 15)
+	//	.option('-p, --port <int>', 'server listen port', parseInt, 8080)
+	//	.option('--root <path>', 'document root', getRoot, vacation.project.getTempPath('www'))
+	//	.option('--script <name>', 'the name of file that to config/expand the server', String)
+	//	//.option('--timeout <seconds>', 'start timeout', parseInt, 15)
 		.action(function(){
 			var args = [].slice.call(arguments);
 			var options = args.pop();
@@ -57,16 +57,16 @@ exports.register = function (commander) {
 				case 'start': 
 					serverKernel.start();
 					break;
-				case 'stop':
-					break;
-				case 'reload':
-					break;
-				case 'restart':
-					break;
-				case 'info':
-					break;
-				case 'open':
-					break;
+	//			case 'stop':
+	//				break;
+	//			case 'reload':
+	//				break;
+	//			case 'restart':
+	//				break;
+	//			case 'info':
+	//				break;
+	//			case 'open':
+	//				break;
 				default:
 					commander.help();
 			}
@@ -77,27 +77,23 @@ exports.register = function (commander) {
 		.command('start')
 		.description('start server');
 
-	commander
-		.command('stop')
-		.description('shutdown server');
+	//commander
+	//	.command('stop')
+	//	.description('shutdown server');
 
-	commander
-		.command('reload')
-		.description('reload the vacation_server.js');
+	//commander
+	//	.command('reload')
+	//	.description('reload the vacation_server.js');
 
-	commander
-		.command('restart')
-		.description('restart server');
+	//commander
+	//	.command('restart')
+	//	.description('restart server');
 
-	commander
-		.command('info')
-		.description('output server info');
+	//commander
+	//	.command('info')
+	//	.description('output server info');
 
-	commander
-		.command('open')
-		.description('open document root directory');
-
-	commander
-		.command('start')
-		.description('start server');
+	//commander
+	//	.command('open')
+	//	.description('open document root directory');
 }

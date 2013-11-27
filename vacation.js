@@ -25,11 +25,13 @@ vacation.cli.commander = null;
 vacation.cli.info = vacation.util.readJSON(__dirname + '/package.json');
 vacation.cli.config = vacation.util.merge({
 	server:{
-		port: 8080,
-		root: ''
+		port: 8181,
+		root: './',
+		defaultFile:"index.html"
 	}
 },vacation.util.getConfig(__dirname));
 vacation.cli.config.cmd_cwd = process.cwd();
+//console.log(vacation.cli.config.cmd_cwd);
 
 //console.log(vacation.cli.config);
 
@@ -46,22 +48,27 @@ vacation.cli.help = function(){
 		prefixLen = prefix.length;
 
 	// build-in commands
-	var deps = {};
+	//var deps = {};
 	//'vacation-command-build': true,
 	//'vacation-command-server': true
-	tools.forEach(function(tool){
-		deps['vacation-command-' + tool] = true;
-	});
+	//tools.forEach(function(tool){
+	//	deps['vacation-command-' + tool] = true;
+	//});
 
-	vacation.util.merge(deps, vacation.cli.info.dependencies);
+	//vacation.util.merge(deps, vacation.cli.info.dependencies);
 	// traverse
-	vacation.util.map(deps, function(name){
-		if(name.indexOf(prefix) === 0){
-			name = name.substring(prefixLen);
-			var cmd = vacation.require('command', name);
-			name = vacation.util.pad(cmd.name || name, 12);
-			content.push('    ' + name + (cmd.desc || ''));
-		}
+	//vacation.util.map(deps, function(name){
+	//	if(name.indexOf(prefix) === 0){
+	//		name = name.substring(prefixLen);
+	//		var cmd = vacation.require('command', name);
+	//		name = vacation.util.pad(cmd.name || name, 12);
+	//		content.push('    ' + name + (cmd.desc || ''));
+	//	}
+	//});
+	tools.forEach(function(tool){
+		var cmd = require('./vacation-command-' + tool);
+		var name = vacation.util.pad(cmd.name || tool, 12);
+		content.push('    ' + name + (cmd.desc || ''));
 	});
 	content = content.concat([
 		'',
