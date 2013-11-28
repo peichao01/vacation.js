@@ -1,4 +1,10 @@
 {
+	"build":{
+		"dest":"./dest",
+		"src":"./",
+		"main":["main.js"],
+		"base":"./"
+	},
 	"file":{
 		"transport": true,
 		"transportText": true,
