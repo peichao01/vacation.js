@@ -23,13 +23,15 @@ vacation.cli.commander = null;
 
 // package.json
 vacation.cli.info = vacation.util.readJSON(__dirname + '/package.json');
+var confPath = vacation.cli.configFilePath = vacation.util.getConfigFilePath();
 vacation.cli.config = vacation.util.merge({
 	server:{
 		port: 8181,
 		root: './',
-		defaultFile:"index.html"
+		defaultFile:"index.html",
+		rootRelative:"cwd"
 	}
-},vacation.util.getConfig(__dirname));
+}, confPath ? vacation.util.getConfig(confPath) : {});
 vacation.cli.config.cmd_cwd = process.cwd();
 //console.log(vacation.cli.config.cmd_cwd);
 
