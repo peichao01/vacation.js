@@ -1,9 +1,10 @@
 {
 	"build":{
 		"dest":"./dest",
-		"src":"./",
+		"src":"./src",
 		"main":["main.js"],
-		"base":"./"
+		"base":"./src",
+		"availableType":["js","css","html"]
 	},
 	"file":{
 		"transport": true,

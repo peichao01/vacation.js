@@ -28,13 +28,20 @@ exports.register = function (commander) {
 			var configFileDir = pth.dirname(vacation.cli.configFilePath);
 			//conf.configFilePath = vacation.cli.configFilePath;
 			conf.src = pth.resolve(configFileDir, conf.src);
-			conf.base = pth.resolve(configFileDir, conf.base);
+			if(!conf.base){
+				conf.base = conf.src;
+			}
+			else{
+				conf.base = pth.resolve(configFileDir, conf.base);
+			}
+			
+			//
 			//console.log(conf.src);return;
 			//console.log(options);
 			//console.log(conf);
 			if(options.dest) conf.dest = dest;
-			buildKernel.findMainFiles(conf, function (mainFiles) {
-				buildKernel.generateMap(mainFiles, conf);
+			buildKernel.findMainFiles(conf, function (mainFiles, availableFiles) {
+				buildKernel.generateMap(mainFiles, availableFiles, conf);
 			});
 			
 		});
