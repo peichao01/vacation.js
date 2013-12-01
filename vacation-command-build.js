@@ -15,15 +15,15 @@ exports.register = function (commander) {
 
 	//console.log(vacation.project.getTempPath('www'));return;
 	commander
-		.option('-d, --dest <names>', 'release output destination')
+		//.option('-d, --dest <names>', 'release output destination')
 		//.option('-m, --md5 [level]', 'md5 release option')
 		//.option('-D, --domains', 'add domain name')
-		.option('-o, --optimize', 'with optimizing')
-		.option('-p, --pack', 'with package')
+		//.option('-o, --optimize', 'with optimizing')
+		//.option('-p, --pack', 'with package')
 		.action(function(){
 			var args = [].slice.call(arguments);
 			var options = args.pop();
-			//var cmd = args.shift();
+			var cmd = args.shift();
 			var conf = vacation.cli.config.build;
 			var configFileDir = pth.dirname(vacation.cli.configFilePath);
 			//conf.configFilePath = vacation.cli.configFilePath;
@@ -40,11 +40,20 @@ exports.register = function (commander) {
 			//console.log(options);
 			//console.log(conf);
 			if(options.dest) conf.dest = dest;
-			buildKernel.find_all_and_main_files(conf, function (mainFiles, availableFiles) {
-				buildKernel.dealDependencies(availableFiles, conf, function () {
-					buildKernel.writeMapFile(conf);
+
+			if(cmd === 'start'){
+				buildKernel.find_all_and_main_files(conf, function (mainFiles, availableFiles) {
+					buildKernel.dealDependencies(availableFiles, conf, function () {
+						buildKernel.writeMapFile(conf);
+					});
 				});
-			});
-			
+			}
+			else{
+				commander.help();
+			}
 		});
+
+	commander
+		.command('start')
+		.description('start build');
 }

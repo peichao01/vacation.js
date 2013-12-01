@@ -4,14 +4,16 @@
 		"src":"./src",
 		"main":["main.js"],
 		"base":"./src",
-		"availableType":["js","css","html"]
-	},
-	"file":{
+		"availableType":["js","css","html"],
+		"checkCMD": true,
 		"transport": true,
-		"transportText": true,
+		"transportTpl": true,
+		"tplRemoveWhiteSpace":true,
 		"concat": true,
 		"optimize": true,
 		"compileHandlebars": true
+	},
+	"file":{
 	},
 	"server":{
 		"port":8181,

@@ -26,6 +26,7 @@
   "dependencies": {
     "commander":"~2.1.0",
     "walk":"2.x",
-    "uglify-js":"~2.2.5"
+    "uglify-js":"~2.2.5",
+    "html-minifier":"0.5.4"
   }
 }
