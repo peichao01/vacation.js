@@ -40,8 +40,10 @@ exports.register = function (commander) {
 			//console.log(options);
 			//console.log(conf);
 			if(options.dest) conf.dest = dest;
-			buildKernel.findMainFiles(conf, function (mainFiles, availableFiles) {
-				buildKernel.generateMap(mainFiles, availableFiles, conf);
+			buildKernel.find_all_and_main_files(conf, function (mainFiles, availableFiles) {
+				buildKernel.dealDependencies(availableFiles, conf, function () {
+					buildKernel.writeMapFile(conf);
+				});
 			});
 			
 		});
