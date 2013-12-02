@@ -46,6 +46,7 @@ exports.register = function (commander) {
 					buildKernel.dealDependencies(availableFiles, conf, function () {
 						buildKernel.writeMapFile(conf);
 						buildKernel.transport(conf);
+						buildKernel.concatToMain(conf);
 					});
 				});
 			}

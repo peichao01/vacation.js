@@ -2,18 +2,20 @@
 	"build":{
 		"dest":"./dest",
 		"src":"./src",
-		"main":["main.js"],
+		"main":{
+			"main.js":"$1_combo.js"
+		},
 		"base":"./src",
 		"availableType":["js","css","html"],
 		"checkCMD": true,
+		"notCMD":["handlebars"],
 		"transport": true,
 		"transportTpl": true,
 		"optimize": true,
 		"optimizeTpl":true,
 		"concat": true,
-		"compileHandlebars": true
-	},
-	"file":{
+		"compileHandlebars": true,
+		"style":"inline"
 	},
 	"server":{
 		"port":8181,
