@@ -8,9 +8,9 @@
 		"checkCMD": true,
 		"transport": true,
 		"transportTpl": true,
-		"tplRemoveWhiteSpace":true,
-		"concat": true,
 		"optimize": true,
+		"optimizeTpl":true,
+		"concat": true,
 		"compileHandlebars": true
 	},
 	"file":{

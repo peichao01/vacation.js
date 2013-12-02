@@ -24,6 +24,7 @@ vacation.cli.commander = null;
 // package.json
 vacation.cli.info = vacation.util.readJSON(__dirname + '/package.json');
 var confPath = vacation.cli.configFilePath = vacation.util.getConfigFilePath();
+//console.log(confPath);
 vacation.cli.config = vacation.util.merge({
 	server:{
 		port: 8181,
