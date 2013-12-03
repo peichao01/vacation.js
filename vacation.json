@@ -2,7 +2,7 @@
 	"build":{
 		"dest":"./dest",
 		"src":"./src",
-		"main":{
+		"pkg":{
 			"main.js":"$1_combo.js"
 		},
 		"base":"./src",
