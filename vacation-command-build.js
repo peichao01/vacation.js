@@ -44,7 +44,7 @@ exports.register = function (commander) {
 			if(cmd === 'start'){
 				buildKernel.find_all_and_main_files(conf, function (mainFiles, availableFiles) {
 					buildKernel.dealDependencies(availableFiles, conf, function () {
-						buildKernel.writeMapFile(conf);
+						buildKernel.writeMapFile();
 						buildKernel.transport(conf);
 						buildKernel.concatToMain(conf);
 					});

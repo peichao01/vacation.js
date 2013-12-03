@@ -3,7 +3,9 @@
 		"dest":"./dest",
 		"src":"./src",
 		"pkg":{
-			"main.js":"$1_combo.js"
+			"main.js":{
+				"rule":"$1_$2_combo.js"
+			}
 		},
 		"base":"./src",
 		"availableType":["js","css","html"],
