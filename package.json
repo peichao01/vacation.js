@@ -1,6 +1,6 @@
 {
   "name": "vacation",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "build tools for ctrip.com vacation department web front-end group",
   "main": "vacation.js",
   "bin": {
