@@ -9,7 +9,7 @@ var pth = require('path');
 var buildKernel = require('./lib/lib-build/build-kernel.js');
 
 exports.name = 'build';
-exports.usage = '[options]';
+exports.usage = '<command> [options]';
 exports.desc = 'build your project';
 exports.register = function (commander) {
 
@@ -42,6 +42,7 @@ exports.register = function (commander) {
 			if(options.dest) conf.dest = dest;
 
 			if(cmd === 'start'){
+				buildKernel.getPathedAlias(conf);
 				buildKernel.find_all_and_main_files(conf, function (mainFiles, availableFiles) {
 					buildKernel.dealDependencies(availableFiles, conf, function () {
 						buildKernel.writeMapFile();
