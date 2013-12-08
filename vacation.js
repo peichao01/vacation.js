@@ -5,6 +5,7 @@
 
 'use strict';
 
+var pth = require('path');
 var vacation = module.exports = require('./lib/vacation-kernel');
 
 var tools = ['build', 'server'];
@@ -24,16 +25,27 @@ vacation.cli.commander = null;
 // package.json
 vacation.cli.info = vacation.util.readJSON(__dirname + '/package.json');
 var confPath = vacation.cli.configFilePath = vacation.util.getConfigFilePath();
-//console.log(confPath);
-vacation.cli.config = vacation.util.merge({
+vacation.cli.configFileDir = pth.dirname(confPath);
+if(!confPath) {
+	vacation.log.error('no config file (vacation.json) founded.');
+}
+var config = vacation.cli.config = vacation.util.merge({
 	server:{
 		port: 8181,
 		root: './',
 		defaultFile:"index.html",
 		rootRelative:"cwd"
 	}
-}, confPath ? vacation.util.getConfig(confPath) : {});
-vacation.cli.config.cmd_cwd = process.cwd();
+//}, confPath ? vacation.util.getConfig(confPath) : {});
+}, vacation.util.getConfig(confPath));
+
+if(config.build.ignore) config.build.ignore = config.build.ignore.map(function(ignoreRegArr){
+	return RegExp.apply(null, ignoreRegArr);
+});
+if(config.build.avaliable) config.build.avaliable = config.build.avaliable.map(function(avaliableRegArr){
+	return RegExp.apply(null, avaliableRegArr);
+});
+config.cmd_cwd = process.cwd();
 //console.log(vacation.cli.config.cmd_cwd);
 
 //console.log(vacation.cli.config);

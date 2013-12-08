@@ -28,6 +28,7 @@ exports.register = function (commander) {
 			var configFileDir = pth.dirname(vacation.cli.configFilePath);
 			//conf.configFilePath = vacation.cli.configFilePath;
 			conf.src = pth.resolve(configFileDir, conf.src);
+			conf.dest = pth.resolve(configFileDir, conf.dest);
 			if(!conf.base){
 				conf.base = conf.src;
 			}
@@ -43,13 +44,22 @@ exports.register = function (commander) {
 
 			if(cmd === 'start'){
 				buildKernel.getPathedAlias(conf);
-				buildKernel.find_all_and_main_files(conf, function (mainFiles, availableFiles) {
-					buildKernel.dealDependencies(availableFiles, conf, function () {
-						buildKernel.writeMapFile();
-						buildKernel.transport(conf);
-						buildKernel.concatToMain(conf);
-					});
+				//console.log(conf);process.exit(0);
+				//buildKernel.find_all_and_main_files(conf, function (mainFiles, availableFiles) {
+				//	console.log(availableFiles);process.exit(0);
+				//	buildKernel.dealDependencies(availableFiles, conf, function () {
+				//		buildKernel.writeMapFile();
+				//		//process.exit(0);
+				//		buildKernel.transport(conf);
+				//		buildKernel.concatToMain(conf);
+				//	});
+				//});
+				//console.log(conf);process.exit(0);
+				buildKernel.check_alias_topDir_conflict();
+				buildKernel.dealAllFiles(function(){
+					//console.log(require('./lib/lib-build/resource_manager').getResource());
 				});
+				//console.log('1');
 			}
 			else{
 				commander.help();
