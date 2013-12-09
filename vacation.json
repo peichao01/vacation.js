@@ -2,6 +2,8 @@
 	"build":{
 		"dest":"./dest",
 		"src":"./src",
+		"base":"./src",
+		"www":"./",
 		"pkg":{
 			"main.js":{
 				"rule":"$1_$2_combo.js"
@@ -17,9 +19,8 @@
 
 		],
 		"ignore":[
-			["","g"],
+			["","g"]
 		],
-		"base":"./src",
 		"availableType":["js","css","html"],
 		"transport": true,
 		"transportTpl": true,

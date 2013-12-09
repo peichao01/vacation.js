@@ -25,8 +25,7 @@ exports.register = function (commander) {
 			var options = args.pop();
 			var cmd = args.shift();
 			var conf = vacation.cli.config.build;
-			var configFileDir = pth.dirname(vacation.cli.configFilePath);
-			//conf.configFilePath = vacation.cli.configFilePath;
+			var configFileDir = vacation.cli.configFileDir;
 			conf.src = pth.resolve(configFileDir, conf.src);
 			conf.dest = pth.resolve(configFileDir, conf.dest);
 			if(!conf.base){
@@ -35,12 +34,9 @@ exports.register = function (commander) {
 			else{
 				conf.base = pth.resolve(configFileDir, conf.base);
 			}
-			
-			//
-			//console.log(conf.src);return;
-			//console.log(options);
-			//console.log(conf);
-			if(options.dest) conf.dest = dest;
+			if(conf.www) conf.www = pth.resolve(configFileDir, conf.www);
+
+			//if(options.dest) conf.dest = options.dest;
 
 			if(cmd === 'start'){
 				buildKernel.getPathedAlias(conf);
@@ -49,17 +45,16 @@ exports.register = function (commander) {
 				//	console.log(availableFiles);process.exit(0);
 				//	buildKernel.dealDependencies(availableFiles, conf, function () {
 				//		buildKernel.writeMapFile();
-				//		//process.exit(0);
 				//		buildKernel.transport(conf);
 				//		buildKernel.concatToMain(conf);
 				//	});
 				//});
-				//console.log(conf);process.exit(0);
 				buildKernel.check_alias_topDir_conflict();
 				buildKernel.dealAllFiles(function(){
-					//console.log(require('./lib/lib-build/resource_manager').getResource());
+					buildKernel.dealDependencies();
+					buildKernel.checkCircularReference();
+					buildKernel.writeMapFile();
 				});
-				//console.log('1');
 			}
 			else{
 				commander.help();

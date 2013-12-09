@@ -10,10 +10,6 @@ var vacation = module.exports = require('./lib/vacation-kernel');
 
 var tools = ['build', 'server'];
 
-//vacation.config.merge({
-//	
-//});
-
 // exports cli object
 vacation.cli = {};
 
@@ -36,7 +32,6 @@ var config = vacation.cli.config = vacation.util.merge({
 		defaultFile:"index.html",
 		rootRelative:"cwd"
 	}
-//}, confPath ? vacation.util.getConfig(confPath) : {});
 }, vacation.util.getConfig(confPath));
 
 if(config.build.ignore) config.build.ignore = config.build.ignore.map(function(ignoreRegArr){
@@ -46,9 +41,6 @@ if(config.build.avaliable) config.build.avaliable = config.build.avaliable.map(f
 	return RegExp.apply(null, avaliableRegArr);
 });
 config.cmd_cwd = process.cwd();
-//console.log(vacation.cli.config.cmd_cwd);
-
-//console.log(vacation.cli.config);
 
 // output help info
 vacation.cli.help = function(){
@@ -58,28 +50,8 @@ vacation.cli.help = function(){
 			'',
 			'  Command:',
 			''
-		],
-		prefix = 'vacation-command-',
-		prefixLen = prefix.length;
+		];
 
-	// build-in commands
-	//var deps = {};
-	//'vacation-command-build': true,
-	//'vacation-command-server': true
-	//tools.forEach(function(tool){
-	//	deps['vacation-command-' + tool] = true;
-	//});
-
-	//vacation.util.merge(deps, vacation.cli.info.dependencies);
-	// traverse
-	//vacation.util.map(deps, function(name){
-	//	if(name.indexOf(prefix) === 0){
-	//		name = name.substring(prefixLen);
-	//		var cmd = vacation.require('command', name);
-	//		name = vacation.util.pad(cmd.name || name, 12);
-	//		content.push('    ' + name + (cmd.desc || ''));
-	//	}
-	//});
 	tools.forEach(function(tool){
 		var cmd = require('./vacation-command-' + tool);
 		var name = vacation.util.pad(cmd.name || tool, 12);
