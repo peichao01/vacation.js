@@ -2,23 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/ctrip-vacation-build.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/lib-build/resource_manager.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/lib-build/util.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/lib-build/build-kernel.js" afterPath="$PROJECT_DIR$/lib/lib-build/build-kernel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vacation-command-build.js" afterPath="$PROJECT_DIR$/vacation-command-build.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vacation.js" afterPath="$PROJECT_DIR$/vacation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vacation.json" afterPath="$PROJECT_DIR$/vacation.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ctrip-vacation-build.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" time="1386392640948" ignored="false" />
-    <file path="/build-kernel.js" changelist="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" time="1386518191642" ignored="false" />
+    <file path="/build-kernel.js" changelist="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" time="1386549614761" ignored="false" />
     <file path="/util.js" changelist="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" time="1386403905803" ignored="false" />
     <file path="/resource_manager.js" changelist="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" time="1386517108608" ignored="false" />
     <file path="/vacation-command-build.js" changelist="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" time="1386517804017" ignored="false" />
@@ -28,8 +18,8 @@
     <file path="$USER_HOME$/vacation-v2-test/lib/inherit.js" changelist="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" time="1386507847956" ignored="false" />
     <file path="$USER_HOME$/vacation-v2-test/app/src/detail/v_detail_test.js" changelist="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" time="1386507931507" ignored="false" />
     <file path="/v_detail_test.js" changelist="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" time="1386507929669" ignored="false" />
-    <file path="$USER_HOME$/vacation-v2-test/vacation.json" changelist="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" time="1386518257244" ignored="false" />
-    <file path="/vacation.json" changelist="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" time="1386518215109" ignored="false" />
+    <file path="$USER_HOME$/vacation-v2-test/vacation.json" changelist="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" time="1386549682374" ignored="false" />
+    <file path="/vacation.json" changelist="ec59de57-3e48-4b09-ad3b-8f4e22c77fed" time="1386549148584" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,9 +42,10 @@
       <file leaf-file-name="build-kernel.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/lib-build/build-kernel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="33" selection-start="1706" selection-end="1706" vertical-scroll-proportion="0.5536232">
+            <state line="179" column="8" selection-start="4937" selection-end="4937" vertical-scroll-proportion="0.70869565">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <marker date="1386549635000" expanded="true" signature="4937:5003" placeholder="//..." />
               </folding>
             </state>
           </provider>
@@ -74,7 +65,7 @@
       <file leaf-file-name="vacation-command-build.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vacation-command-build.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="57" selection-start="1833" selection-end="1833" vertical-scroll-proportion="0.0">
+            <state line="59" column="20" selection-start="1881" selection-end="1881" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -431,7 +422,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vacation-command-build.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="57" selection-start="1833" selection-end="1833" vertical-scroll-proportion="0.0">
+        <state line="59" column="20" selection-start="1881" selection-end="1881" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -440,9 +431,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/lib-build/build-kernel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="33" selection-start="1706" selection-end="1706" vertical-scroll-proportion="0.5536232">
+        <state line="179" column="8" selection-start="4937" selection-end="4937" vertical-scroll-proportion="0.70869565">
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <marker date="1386549635000" expanded="true" signature="4937:5003" placeholder="//..." />
           </folding>
         </state>
       </provider>
