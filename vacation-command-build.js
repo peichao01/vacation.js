@@ -49,11 +49,13 @@ exports.register = function (commander) {
 				//		buildKernel.concatToMain(conf);
 				//	});
 				//});
+				//console.log(conf);process.exit(0);
 				buildKernel.check_alias_topDir_conflict();
 				buildKernel.dealAllFiles(function(){
 					buildKernel.dealDependencies();
 					buildKernel.checkCircularReference();
 					buildKernel.writeMapFile();
+					buildKernel.transport();
 				});
 			}
 			else{

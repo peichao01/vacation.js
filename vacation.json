@@ -4,11 +4,12 @@
 		"src":"./src",
 		"base":"./src",
 		"www":"./",
-		"pkg":{
-			"main.js":{
+		"pkg":[
+			{
+				"name":["main\.js$"],
 				"rule":"$1_$2_combo.js"
 			}
-		},
+		],
 		"alias":{
 
 		},
