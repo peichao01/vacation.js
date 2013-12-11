@@ -56,6 +56,7 @@ exports.register = function (commander) {
 					buildKernel.checkCircularReference();
 					buildKernel.writeMapFile();
 					buildKernel.transport();
+					buildKernel.concatByPackage();
 				});
 			}
 			else{
