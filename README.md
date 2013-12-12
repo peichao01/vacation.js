@@ -1,8 +1,9 @@
 vacation
 ====================
-vacation has two tools, build and server.
+vacation has two tools, build and server.  
 
-learn & use [wiki](https://github.com/peichao01/vacation/wiki)
+**learn & use => [wiki](https://github.com/peichao01/vacation/wiki)**
+
 
 server
 ------------------
