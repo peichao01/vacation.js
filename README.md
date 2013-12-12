@@ -2,6 +2,8 @@ vacation
 ====================
 vacation has two tools, build and server.
 
+learn & use [wiki](https://github.com/peichao01/vacation/wiki)
+
 server
 ------------------
 vacation server now is still beta now, its goal is to be a express-like server for the front ent developers, the first step is serves for the static contents like html,css,javascript etc. and the second step is feed it a server.js file to serves for every dynamic content like a real server.
