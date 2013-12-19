@@ -6,7 +6,7 @@
 		"www":"./",
 		"pkg":[
 			{
-				"name":["main\.js$"],
+				"name":["main\\.js$"],
 				"rule":"$1_$2_combo.js"
 			}
 		],
@@ -20,7 +20,7 @@
 
 		],
 		"ignore":[
-			["","g"]
+			
 		],
 		"availableType":["js","css","html"],
 		"transport": true,

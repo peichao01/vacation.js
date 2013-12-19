@@ -8,39 +8,33 @@
 var pth = require('path');
 var vacation = module.exports = require('./lib/vacation-kernel');
 
-var tools = ['build', 'server'];
+var tools = ['build', 'server', 'init'];
 
-// exports cli object
-vacation.cli = {};
-
-vacation.cli.name = 'vacation';
-
-// commander object
-vacation.cli.commander = null;
-
-// package.json
-vacation.cli.info = vacation.util.readJSON(__dirname + '/package.json');
-var confPath = vacation.cli.configFilePath = vacation.util.getConfigFilePath();
-vacation.cli.configFileDir = pth.dirname(confPath);
-if(!confPath) {
-	vacation.log.error('[410] no config file (vacation.json) founded.');
-}
-var config = vacation.cli.config = vacation.util.merge({
-	server:{
-		port: 8181,
-		root: './',
-		defaultFile:"index.html",
-		rootRelative:"cwd"
-	}
-}, vacation.util.getConfig(confPath));
-
-if(config.build.ignore) config.build.ignore = config.build.ignore.map(function(ignoreRegArr){
-	return RegExp.apply(null, ignoreRegArr);
-});
-if(config.build.avaliable) config.build.avaliable = config.build.avaliable.map(function(avaliableRegArr){
-	return RegExp.apply(null, avaliableRegArr);
-});
-config.cmd_cwd = process.cwd();
+var configFilePath = vacation.util.getConfigFilePath();
+var info = vacation.util.readJSON(pth.join(__dirname, 'package.json'));
+//console.log(configFilePath);process.exit(0);
+vacation.cli = {
+	name: 'vacation',
+	commander: null,
+	cmd_cwd: process.cwd(),
+	info: info,
+	tips: {
+		initConfig: "\n\n or you can use [\"vacation init config\"] to generate a template config file."
+	},
+	templateConfigFilePath: pth.join(__dirname, 'vacation.json'),
+	configFilePath: configFilePath,
+	configFileDir: configFilePath && pth.dirname(configFilePath),
+	config: vacation.util.merge({
+		build: {},
+		server:{
+			port: 8181,
+			root: './',
+			defaultFile:"index.html",
+			rootRelative:"cwd"
+		},
+		contentType: {}
+	}, vacation.util.getConfig(configFilePath))
+};
 
 // output help info
 vacation.cli.help = function(){
@@ -75,6 +69,17 @@ vacation.cli.version = function(){
 	].join('\n');
 	console.log(content);
 }; 
+// if(!configFilePath) {
+// 	vacation.log.error('[410] no config file (vacation.json) founded.');
+// }
+var config = vacation.cli.config;
+
+if(config.build.ignore) config.build.ignore = config.build.ignore.map(function(ignoreRegArr){
+	return RegExp.apply(null, ignoreRegArr);
+});
+if(config.build.avaliable) config.build.avaliable = config.build.avaliable.map(function(avaliableRegArr){
+	return RegExp.apply(null, avaliableRegArr);
+});
 
 function hasArgv(argv, search){
     var pos = argv.indexOf(search);

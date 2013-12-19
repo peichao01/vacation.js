@@ -26,6 +26,13 @@ exports.register = function (commander) {
 			var cmd = args.shift();
 			var conf = vacation.cli.config.build;
 			var configFileDir = vacation.cli.configFileDir;
+			if(!configFileDir){
+				vacation.log.error("you should provide a config file(vacation.json) if you need the build ability. see ["+vacation.cli.info.homepage+"] for more information."
+									+ vacation.cli.tips.initConfig);
+			}
+			if(!conf.dest || !conf.src || !conf.base){
+				vacation.log.error('"dest" and "src" and "base" field must be provided in the config file build object.' + vacation.cli.tips.initConfig);
+			}
 			conf.src = pth.resolve(configFileDir, conf.src);
 			conf.dest = pth.resolve(configFileDir, conf.dest);
 			if(!conf.base){

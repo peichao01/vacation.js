@@ -1,6 +1,11 @@
 {
   "name": "vacation",
   "version": "0.1.0",
+  "author": {
+    "name": "chao2",
+    "email": "i@peichao01.com"
+  },
+  "homepage":"https://github.com/peichao01/vacation",
   "description": "build tools for ctrip.com vacation department web front-end group",
   "main": "vacation.js",
   "bin": {
@@ -15,13 +20,11 @@
   },
   "keywords": [
     "build",
+    "seajs",
     "ctrip",
+    "server",
     "vacation"
   ],
-  "author": {
-    "name": "chao2",
-    "email": "i@peichao01.com"
-  },
   "license": "BSD",
   "dependencies": {
     "commander":"~2.1.0",
