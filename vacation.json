@@ -16,11 +16,12 @@
 		"paths":{
 			
 		},
-		"avaliable":[
+		"available":[
 
 		],
 		"ignore":[
-			
+			["^vacation.json"],
+			["^map.json"]
 		],
 		"availableType":["js","css","html"],
 		"compileHandlebars": true

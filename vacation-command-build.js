@@ -7,11 +7,17 @@
 
 var pth = require('path');
 var buildKernel = require('./lib/lib-build/build-kernel.js');
+var buildUtil = require('./lib/lib-build/util.js');
 
 exports.name = 'build';
 exports.usage = '<command> [options]';
 exports.desc = 'build your project';
 exports.register = function (commander) {
+
+	var COMMAND = {
+		TPL: 'tpl',
+		START: 'start'
+	};
 
 	//console.log(vacation.project.getTempPath('www'));return;
 	commander
@@ -30,6 +36,9 @@ exports.register = function (commander) {
 		.option('-C, --cssinline', 'inline dependency css file content to the '
 				+ '\n\tconcated file.')
 		.option('-H, --Handlebars', 'precompile Handlebars template')
+		.option('-T, --tplonly', 'only use tpl(.tpl|.html) even if transported '
+				+ '\n\ttpl(.tpl.js|.html.js) exists too.')
+		.option('-w, --watch', '[tpl only] watch and build templates')
 		.action(function(){
 			var args = [].slice.call(arguments);
 			var options = args.pop();
@@ -53,46 +62,63 @@ exports.register = function (commander) {
 			}
 			if(conf.www) conf.www = pth.resolve(configFileDir, conf.www);
 
-			console.log(options.cssinline);process.exit(0);
+			if(buildUtil.values(COMMAND).indexOf(cmd) < 0) {
+				commander.help();
+			}
+			// 任何命令都要先执行前几个步骤
+			else{
+				//console.log(conf);process.exit(0);
 
-			if(cmd === 'start'){
 				// replace the alias with the paths value
 				buildKernel.getPathedAlias(conf);
 				// check alias & paths & base-child-dir name conflict
 				buildKernel.check_alias_topDir_conflict();
 				// deal all the files in the first time
-				buildKernel.dealAllFiles(function(){
-					// deal module dependencies
-					buildKernel.dealDependencies();
-					// check circular reference
-					buildKernel.checkCircularReference();
-					// write the map.json file to the cmd_cwd
-					if(options.map){
-						buildKernel.writeMapFile();
-					}
+				buildKernel.dealAllFiles({
+					isConsoleIgnored: cmd === COMMAND.START,
+					callback: function(){
 
-					// transport
-					if(options.transport){
-						buildKernel.transport({
-							isOptimize: options.optimize,
-							transportDir: options.transport
-						});
-					}
-					// concat
-					if(options.concat){
-						buildKernel.concatByPackage({
-							isOptimize: options.optimize,
-							isCssInline: options.cssinline
-						});
+						if(cmd === COMMAND.START){
+							// deal module dependencies
+							buildKernel.dealDependencies();
+							// check circular reference
+							buildKernel.checkCircularReference();
+							// write the map.json file to the cmd_cwd
+							if(options.map){
+								buildKernel.writeMapFile();
+							}
+
+							// transport
+							if(options.transport){
+								buildKernel.transport({
+									isOptimize: options.optimize,
+									transportDir: options.transport
+								});
+							}
+							// concat
+							if(options.concat){
+								buildKernel.concatByPackage({
+									isOptimize: options.optimize,
+									isCssInline: options.cssinline
+								});
+							}
+						}
+						else if(cmd == COMMAND.TPL){
+							//console.log(options.transport);
+							buildKernel.TPLBuild({
+								isOptimize: options.optimize,
+								isWatch: options.watch
+							});
+						}
 					}
 				});
-			}
-			else{
-				commander.help();
 			}
 		});
 
 	commander
-		.command('start')
+		.command(COMMAND.START)
 		.description('start build');
+	commander
+		.command(COMMAND.TPL)
+		.description('build templates');
 }

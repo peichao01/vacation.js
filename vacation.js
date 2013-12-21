@@ -77,8 +77,8 @@ var config = vacation.cli.config;
 if(config.build.ignore) config.build.ignore = config.build.ignore.map(function(ignoreRegArr){
 	return RegExp.apply(null, ignoreRegArr);
 });
-if(config.build.avaliable) config.build.avaliable = config.build.avaliable.map(function(avaliableRegArr){
-	return RegExp.apply(null, avaliableRegArr);
+if(config.build.available) config.build.available = config.build.available.map(function(availableRegArr){
+	return RegExp.apply(null, availableRegArr);
 });
 
 function hasArgv(argv, search){

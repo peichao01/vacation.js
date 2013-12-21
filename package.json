@@ -30,6 +30,6 @@
     "commander":"~2.1.0",
     "walk":"2.x",
     "uglify-js":"~2.2.5",
-    "html-minifier":"0.5.4"
+    "node-watch":"~0.3.4"
   }
 }
