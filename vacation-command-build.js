@@ -20,6 +20,16 @@ exports.register = function (commander) {
 		//.option('-D, --domains', 'add domain name')
 		//.option('-o, --optimize', 'with optimizing')
 		//.option('-p, --pack', 'with package')
+		.option('-m, --map', 'write the map.json file to the $cmd_cwd dir.')
+		.option('-c, --concat', 'concat all modules that the $pkg module dependen-'
+				+ '\n\tcies. config the output file rule in the vacation.json')
+		.option('-t, --transport <dir>', 'transport and output the results to the `dir` dir. '
+				+ '\n\t`dir` relative to the $dest dir. ')
+		.option('-o, --optimize', 'optimize/uglify the modules that transported '
+				+ '\n\tor/and concated results.')
+		.option('-C, --cssinline', 'inline dependency css file content to the '
+				+ '\n\tconcated file.')
+		.option('-H, --Handlebars', 'precompile Handlebars template')
 		.action(function(){
 			var args = [].slice.call(arguments);
 			var options = args.pop();
@@ -43,27 +53,38 @@ exports.register = function (commander) {
 			}
 			if(conf.www) conf.www = pth.resolve(configFileDir, conf.www);
 
-			//if(options.dest) conf.dest = options.dest;
+			console.log(options.cssinline);process.exit(0);
 
 			if(cmd === 'start'){
+				// replace the alias with the paths value
 				buildKernel.getPathedAlias(conf);
-				//console.log(conf);process.exit(0);
-				//buildKernel.find_all_and_main_files(conf, function (mainFiles, availableFiles) {
-				//	console.log(availableFiles);process.exit(0);
-				//	buildKernel.dealDependencies(availableFiles, conf, function () {
-				//		buildKernel.writeMapFile();
-				//		buildKernel.transport(conf);
-				//		buildKernel.concatToMain(conf);
-				//	});
-				//});
-				//console.log(conf);process.exit(0);
+				// check alias & paths & base-child-dir name conflict
 				buildKernel.check_alias_topDir_conflict();
+				// deal all the files in the first time
 				buildKernel.dealAllFiles(function(){
+					// deal module dependencies
 					buildKernel.dealDependencies();
+					// check circular reference
 					buildKernel.checkCircularReference();
-					buildKernel.writeMapFile();
-					buildKernel.transport();
-					buildKernel.concatByPackage();
+					// write the map.json file to the cmd_cwd
+					if(options.map){
+						buildKernel.writeMapFile();
+					}
+
+					// transport
+					if(options.transport){
+						buildKernel.transport({
+							isOptimize: options.optimize,
+							transportDir: options.transport
+						});
+					}
+					// concat
+					if(options.concat){
+						buildKernel.concatByPackage({
+							isOptimize: options.optimize,
+							isCssInline: options.cssinline
+						});
+					}
 				});
 			}
 			else{

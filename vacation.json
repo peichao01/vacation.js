@@ -23,13 +23,7 @@
 			
 		],
 		"availableType":["js","css","html"],
-		"transport": true,
-		"transportTpl": true,
-		"optimize": true,
-		"optimizeTpl":true,
-		"concat": true,
-		"compileHandlebars": true,
-		"style":"inline"
+		"compileHandlebars": true
 	},
 	"server":{
 		"port":8181,

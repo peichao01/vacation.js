@@ -56,7 +56,7 @@ vacation.cli.help = function(){
 		'  Options:',
 		'',
 		'    -h, --help        output usage information',
-		'    -V, --version     output the version number',
+		'    -v, --version     output the version number',
 		''
 	]);
 	console.log(content.join('\n'));
@@ -98,7 +98,7 @@ vacation.cli.run = function(argv){
 	var first = argv[2];
 	if(argv.length < 3 || first === '-h' || first === '--help'){
 		vacation.cli.help();
-	} else if(first === '-V' || first === '--version'){
+	} else if(first === '-v' || first === '--version'){
 		vacation.cli.version();
 	} else if(tools.indexOf(first) < 0){
 		vacation.cli.help();
