@@ -1,0 +1,84 @@
+ <a id="ctrip_qz" class="under_tab_anchor">&nbsp;</a>
+<h3 class="resource_title">这里是汉字/这里是汉字<i class="icon_b icon_b_07"></i></h3>
+{{#if IsVisaNoteShow}}
+	<dl class="detail_date"{{#unless IsVisaNoteShowBorder}} style="border-bottom:none"{{/unless}}>
+		<dt>{{{VisaNote}}}</dt>
+		<dd>
+			<ul class="num_list">
+				{{#each VisaContainDetails}}
+				<li>{{this.Detail}}</li>
+				{{/each}}
+			</ul>
+		</dd>
+	</dl>
+{{/if}}
+{{#if IsAgencyNoteShow}}
+	<dl class="detail_date"{{#unless IsAgencyNoteShowBorder}} style="border-bottom:none"{{/unless}}>
+		<dt>{{{AgencyNote}}}</dt>
+		<dd>
+			<ul class="num_list">
+				<li>{{{AgencyContainDetail}}}</li>
+			</ul>
+		</dd>
+	</dl>
+{{/if}}
+{{#if IsVisaCountryShow}}
+	<p class="detail_visa_notice">{{{VisaHeadNote}}}</p>
+	{{#if IsCountryTabShow}}
+	<div class="detail_visa_list basefix">
+		{{#each VisaCountries}}
+		<a href="javascript:void(0);"{{#unless @index}} class="current"{{/unless}}>{{{this}}}这里是汉字</a>
+		{{/each}}
+	</div>
+	{{/if}}
+	{{#each VisaCountryInfos}}
+	{{! 这里是汉字 div，这里是汉字 }}
+	<div class="js-visa-table-wrap"{{#if @index}} style="display:none"{{/if}}>
+		{{#if ../IsVisaTabShow}}
+		<div class="detail_visa_tips basefix">
+			{{#each this}}
+			<a href="javascript:void(0);"{{#unless @index}} class="current"{{/unless}}>{{this.Name}}</a>
+			{{/each}}
+		</div>
+		{{/if}}
+		{{#each this}}
+		<div class="detail_visa_content"{{#if @index}} style="display:none"{{/if}}>
+			<div class="visa_type basefix">
+				{{#each VisaClientTypes}}
+				<a href="javascript:void(0);"{{#unless @index}} class="current"{{/unless}}>{{this.Name}}</a>
+				{{/each}}
+			</div>
+			{{#each VisaClientTypes}}
+			<table class="visa_list" width="100这里是汉字"{{#if @index}} style="display:none"{{/if}}>
+				{{#notEmpty ../VisaWorktime}}
+				<tr>
+					<th>这里是汉字</th>
+					{{! TODO:这里是汉字，这里是汉字 #isEmpty 这里是汉字 else 这里是汉字 context，这里是汉字 VisaWorktime 这里是汉字 }}
+					<td>{{../../VisaWorktime}}</td>
+				</tr>
+				{{/notEmpty}}
+				{{#notEmpty ../VisaAcceptedRange}}
+				<tr>
+					<th>这里是汉字</th>
+					<td>{{../../VisaAcceptedRange}}</td>
+				</tr>
+				{{/notEmpty}}
+				{{#each VisaStuffs}}
+				<tr>
+					<th>{{#if Options}}这里是汉字{{else}}这里是汉字{{/if}}{{{Name}}}</th>
+					<td>{{{Content}}}</td>
+				</tr>
+				{{/each}}
+				{{#notEmpty ../VisaRemark}}
+				<tr>
+					<th>这里是汉字</th>
+					<td>{{../../VisaRemark}}</td>
+				</tr>
+				{{/notEmpty}}
+			</table>
+			{{/each}}
+		</div>
+		{{/each}}
+		</div>
+	{{/each}}
+{{/if}}

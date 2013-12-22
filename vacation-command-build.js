@@ -19,23 +19,25 @@ exports.register = function (commander) {
 		START: 'start'
 	};
 
-	//console.log(vacation.project.getTempPath('www'));return;
 	commander
-		//.option('-d, --dest <names>', 'release output destination')
-		//.option('-m, --md5 [level]', 'md5 release option')
-		//.option('-D, --domains', 'add domain name')
-		//.option('-o, --optimize', 'with optimizing')
-		//.option('-p, --pack', 'with package')
 		.option('-m, --map', 'write the map.json file to the $cmd_cwd dir.')
 		.option('-c, --concat', 'concat all modules that the $pkg module dependen-'
-				+ '\n\tcies. config the output file rule in the vacation.json')
+				+ '\n\t cies. config the output file rule in the vacation.json')
 		.option('-t, --transport <dir>', 'transport and output the results to the `dir` dir. '
-				+ '\n\t`dir` relative to the $dest dir. ')
+				+ '\n\t `dir` relative to the $dest dir. ')
 		.option('-o, --optimize', 'optimize/uglify the modules that transported '
-				+ '\n\tor/and concated results.')
+				+ '\n\t or/and concated results.')
 		.option('-C, --cssinline', 'inline dependency css file content to the '
-				+ '\n\tconcated file.')
-		.option('-H, --Handlebars', 'precompile Handlebars template')
+				+ '\n\t concated file.')
+		.option('-H, --Handlebars [mode]', 'precompile Handlebars template.'
+				+ '\n\t mode = 0, not precompile'
+				+ '\n\t mode = 1, [NOT RECOMMAND] precompile and deal '
+				+ 		'\n\t\t Handlebars.compile() in modules'
+				+ '\n\t mode = 2, precompile but keep the Handlebars.compile'
+				+ '\n\t mode = 3, precompile and keep the fn, and insert a Handlebars patch'
+				+ 		'\n\t\t on top of the package file(transport or concat)'
+				+ '\n\t mode = 4, do nothing but console.log the patch'
+				+ '\n\t default to 0', 0)
 		.option('-T, --tplonly', 'only use tpl(.tpl|.html) even if transported '
 				+ '\n\ttpl(.tpl.js|.html.js) exists too.')
 		.option('-w, --watch', '[tpl only] watch and build templates')
@@ -44,6 +46,17 @@ exports.register = function (commander) {
 			var options = args.pop();
 			var cmd = args.shift();
 			var conf = vacation.cli.config.build;
+
+			////////////////////////////////////////////////
+			// options.Handlebars == 4 特殊对待
+			options.Handlebars = buildUtil.int(options.Handlebars) || 0;
+			if(cmd === COMMAND.START && options.Handlebars == 4){
+				var patch = buildUtil.readFile(pth.resolve(__dirname,'./lib/lib-build/tpl_hb_precompile.txt'));
+				console.log(patch);
+				return;
+			}
+			////////////////////////////////////////////////
+
 			var configFileDir = vacation.cli.configFileDir;
 			if(!configFileDir){
 				vacation.log.error("you should provide a config file(vacation.json) if you need the build ability. see ["+vacation.cli.info.homepage+"] for more information."
@@ -67,8 +80,6 @@ exports.register = function (commander) {
 			}
 			// 任何命令都要先执行前几个步骤
 			else{
-				//console.log(conf);process.exit(0);
-
 				// replace the alias with the paths value
 				buildKernel.getPathedAlias(conf);
 				// check alias & paths & base-child-dir name conflict
@@ -92,17 +103,24 @@ exports.register = function (commander) {
 							if(options.transport){
 								buildKernel.transport({
 									isOptimize: options.optimize,
-									transportDir: options.transport
+									transportDir: options.transport,
+									isTplonly: options.tplonly,
+									HandlebarsMode: options.Handlebars
 								});
 							}
 							// concat
 							if(options.concat){
 								buildKernel.concatByPackage({
 									isOptimize: options.optimize,
-									isCssInline: options.cssinline
+									isCssInline: options.cssinline,
+									isWriteMap: options.map,
+									isTplonly: options.tplonly,
+									HandlebarsMode: options.Handlebars
 								});
 							}
 						}
+						// 这里不支持预编译模板
+						// 只有部署编译时才可以
 						else if(cmd == COMMAND.TPL){
 							//console.log(options.transport);
 							buildKernel.TPLBuild({

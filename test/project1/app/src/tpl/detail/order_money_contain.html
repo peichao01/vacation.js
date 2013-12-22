@@ -1,0 +1,35 @@
+{{! 这里是汉字 }}
+{{#anyNoneEmpty FeeInfos FlightContains}}
+<div id="js-money-contain" class="flt_htl_resource basefix">
+	<h3 class="resource_title">
+		这里是汉字&nbsp;&nbsp;这里是汉字<i class="icon_b icon_b_03"></i>
+	</h3>
+	{{#notEmpty FeeInfos}}
+	<div class="cost_detail"{{#unless FlightContains}} style="border-bottom:0"{{/unless}}>
+		
+			{{#each FeeInfos}}
+				{{#notEmpty PkgDescEntitys}}
+				<h4 class="resource_detail_title">{{TitleName}}</h4>
+				<ul class="resource_detail_list">
+					{{#each PkgDescEntitys}}
+					<li>{{Detail}}</li>
+					{{/each}}
+				</ul>
+				{{/notEmpty}}
+			{{/each}}
+	</div>
+	{{/notEmpty}}
+	{{#notEmpty FlightContains}}
+	<div class="include_flt basefix">
+		<h4>
+			<i></i>这里是汉字
+		</h4>
+		<div class="flt_detail_wrap">
+			{{#each FlightContains}}
+			<span class="pubFlights_{{AirlineCode}}">{{this.AirlineName}}&nbsp;{{this.FlightNo}}({{this.DepartCityName}}{{this.DepartTime}}-{{this.ArriveCityName}}{{this.ArriveTime}})</span>
+			{{/each}}
+		</div>
+	</div>
+	{{/notEmpty}}
+</div>
+{{/anyNoneEmpty}}

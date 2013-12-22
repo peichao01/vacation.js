@@ -1,0 +1,651 @@
+{
+    "res": {
+        "lib/inherit.js": {
+            "uri": "E:\\vacation\\test\\project1\\lib\\inherit.js",
+            "id": "lib/inherit.js",
+            "type": "js",
+            "idType": "real_alias",
+            "inBase": false,
+            "inSrc": false,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "jquery": {
+            "uri": "E:\\vacation\\test\\project1\\lib\\jquery.js",
+            "id": "jquery",
+            "type": "js",
+            "idType": "real_alias",
+            "inBase": false,
+            "inSrc": false,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "underscore": {
+            "uri": "E:\\vacation\\test\\project1\\lib\\underscore.js",
+            "id": "underscore",
+            "type": "js",
+            "idType": "real_alias",
+            "inBase": false,
+            "inSrc": false,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "tpl/Modules/ProductPreviewManager.html": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\Modules\\ProductPreviewManager.html",
+            "id": "tpl/Modules/ProductPreviewManager.html",
+            "type": "html",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "deps": []
+        },
+        "tpl/Modules/ProductPreviewManager.html.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\Modules\\ProductPreviewManager.html.js",
+            "id": "tpl/Modules/ProductPreviewManager.html.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "tpl/detail/big_order.html": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\big_order.html",
+            "id": "tpl/detail/big_order.html",
+            "type": "html",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "deps": []
+        },
+        "tpl/detail/big_order.html.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\big_order.html.js",
+            "id": "tpl/detail/big_order.html.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "tpl/detail/hotel_room_detail.html": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\hotel_room_detail.html",
+            "id": "tpl/detail/hotel_room_detail.html",
+            "type": "html",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "deps": []
+        },
+        "tpl/detail/hotel_room_detail.html.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\hotel_room_detail.html.js",
+            "id": "tpl/detail/hotel_room_detail.html.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": []
+        },
+        "tpl/detail/hotel_room_list.html": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\hotel_room_list.html",
+            "id": "tpl/detail/hotel_room_list.html",
+            "type": "html",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "deps": []
+        },
+        "tpl/detail/hotel_room_list.html.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\hotel_room_list.html.js",
+            "id": "tpl/detail/hotel_room_list.html.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "tpl/detail/order_money_contain.html": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\order_money_contain.html",
+            "id": "tpl/detail/order_money_contain.html",
+            "type": "html",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "deps": []
+        },
+        "tpl/detail/order_money_contain.html.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\order_money_contain.html.js",
+            "id": "tpl/detail/order_money_contain.html.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "tpl/detail/order_needknow.html": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\order_needknow.html",
+            "id": "tpl/detail/order_needknow.html",
+            "type": "html",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "deps": []
+        },
+        "tpl/detail/order_needknow.html.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\order_needknow.html.js",
+            "id": "tpl/detail/order_needknow.html.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "tpl/detail/special_info.html": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\special_info.html",
+            "id": "tpl/detail/special_info.html",
+            "type": "html",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "deps": []
+        },
+        "tpl/detail/special_info.html.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\special_info.html.js",
+            "id": "tpl/detail/special_info.html.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "tpl/detail/visa.html": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\visa.html",
+            "id": "tpl/detail/visa.html",
+            "type": "html",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "deps": []
+        },
+        "tpl/detail/visa.html.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\tpl\\detail\\visa.html.js",
+            "id": "tpl/detail/visa.html.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "style/v_detail.css": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\style\\v_detail.css",
+            "id": "style/v_detail.css",
+            "type": "css",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "public/address.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\public\\address.js",
+            "id": "public/address.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "data/addr_data.js"
+            ]
+        },
+        "public/bigcalendar.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\public\\bigcalendar.js",
+            "id": "public/bigcalendar.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery"
+            ],
+            "pkg": "p0"
+        },
+        "public/EventEmitter.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\public\\EventEmitter.js",
+            "id": "public/EventEmitter.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "public/jz_adv.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\public\\jz_adv.js",
+            "id": "public/jz_adv.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": -1,
+            "deps": []
+        },
+        "public/jz_adv_comm.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\public\\jz_adv_comm.js",
+            "id": "public/jz_adv_comm.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": -1,
+            "deps": []
+        },
+        "public/jz_adv_comm_index.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\public\\jz_adv_comm_index.js",
+            "id": "public/jz_adv_comm_index.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": -1,
+            "deps": []
+        },
+        "public/loadDest.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\public\\loadDest.js",
+            "id": "public/loadDest.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery"
+            ]
+        },
+        "public/popup.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\public\\popup.js",
+            "id": "public/popup.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": -1,
+            "deps": []
+        },
+        "Modules/HotelSelect.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\Modules\\HotelSelect.js",
+            "id": "Modules/HotelSelect.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "underscore",
+                "lib/inherit.js",
+                "public/EventEmitter.js",
+                "detail/mod_util.js",
+                "Modules/SelectBase.js",
+                "Interface/IDetailPageOrderComponent.js",
+                "tpl/detail/hotel_room_list.html.js"
+            ],
+            "pkg": "p0"
+        },
+        "Modules/ProductPreviewManager.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\Modules\\ProductPreviewManager.js",
+            "id": "Modules/ProductPreviewManager.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "underscore",
+                "lib/inherit.js",
+                "public/EventEmitter.js"
+            ],
+            "pkg": "p0"
+        },
+        "Modules/scrollspy.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\Modules\\scrollspy.js",
+            "id": "Modules/scrollspy.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery"
+            ],
+            "pkg": "p0"
+        },
+        "Modules/SelectBase.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\Modules\\SelectBase.js",
+            "id": "Modules/SelectBase.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "underscore",
+                "lib/inherit.js",
+                "public/EventEmitter.js"
+            ],
+            "pkg": "p0"
+        },
+        "Interface/IDetailPageOrderComponent.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\Interface\\IDetailPageOrderComponent.js",
+            "id": "Interface/IDetailPageOrderComponent.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "detail/mode_detail_orderbar_fix.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\mode_detail_orderbar_fix.js",
+            "id": "detail/mode_detail_orderbar_fix.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "underscore",
+                "detail/mod_util.js"
+            ],
+            "pkg": "p0"
+        },
+        "detail/mod_detail_big_order.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\mod_detail_big_order.js",
+            "id": "detail/mod_detail_big_order.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "underscore",
+                "public/EventEmitter.js",
+                "detail/mod_util.js",
+                "Modules/HotelSelect.js",
+                "detail/mod_detail_big_order_flight.js",
+                "detail/mod_detail_big_order_other.js",
+                "detail/mode_detail_orderbar_fix.js",
+                "http://webresource.xxx.com/path/to/here.js",
+                "detail/mod_detail_dataManager.js",
+                "Modules/SelectBase.js",
+                "lib/inherit.js",
+                "tpl/detail/hotel_room_list.html.js",
+                "tpl/detail/big_order.html.js",
+                "tpl/detail/order_money_contain.html.js"
+            ],
+            "pkg": "p0"
+        },
+        "detail/mod_detail_big_order_flight.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\mod_detail_big_order_flight.js",
+            "id": "detail/mod_detail_big_order_flight.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "underscore",
+                "lib/inherit.js",
+                "public/EventEmitter.js"
+            ],
+            "pkg": "p0"
+        },
+        "detail/mod_detail_big_order_other.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\mod_detail_big_order_other.js",
+            "id": "detail/mod_detail_big_order_other.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "underscore",
+                "lib/inherit.js",
+                "detail/mod_util.js",
+                "public/EventEmitter.js",
+                "Modules/SelectBase.js",
+                "Interface/IDetailPageOrderComponent.js"
+            ],
+            "pkg": "p0"
+        },
+        "detail/mod_detail_calendar.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\mod_detail_calendar.js",
+            "id": "detail/mod_detail_calendar.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "underscore",
+                "public/EventEmitter.js",
+                "detail/mod_util.js",
+                "public/bigcalendar.js",
+                "detail/mod_detail_dataManager.js"
+            ],
+            "pkg": "p0"
+        },
+        "detail/mod_detail_dataManager.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\mod_detail_dataManager.js",
+            "id": "detail/mod_detail_dataManager.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "underscore",
+                "detail/mod_util.js"
+            ],
+            "pkg": "p0"
+        },
+        "detail/mod_detail_needknow.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\mod_detail_needknow.js",
+            "id": "detail/mod_detail_needknow.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "underscore",
+                "public/EventEmitter.js",
+                "detail/mod_util.js",
+                "tpl/detail/order_needknow.html.js",
+                "tpl/detail/visa.html.js"
+            ],
+            "pkg": "p0"
+        },
+        "detail/mod_util.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\mod_util.js",
+            "id": "detail/mod_util.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "underscore",
+                "jquery"
+            ],
+            "pkg": "p0"
+        },
+        "detail/v_detail.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\v_detail.js",
+            "id": "detail/v_detail.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "underscore",
+                "detail/mod_util.js",
+                "detail/mod_detail_big_order.js",
+                "detail/mod_detail_calendar.js",
+                "detail/mod_detail_needknow.js",
+                "detail/v_hotel.js",
+                "detail/v_dp.js",
+                "detail/v_flight.js",
+                "style/v_detail.css",
+                "tpl/Modules/ProductPreviewManager.html.js",
+                "tpl/detail/special_info.html.js",
+                "Modules/ProductPreviewManager.js"
+            ]
+        },
+        "detail/v_dp.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\v_dp.js",
+            "id": "detail/v_dp.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "public/EventEmitter.js"
+            ],
+            "pkg": "p0"
+        },
+        "detail/v_flight.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\v_flight.js",
+            "id": "detail/v_flight.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "public/EventEmitter.js"
+            ],
+            "pkg": "p0"
+        },
+        "detail/v_hotel.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\v_hotel.js",
+            "id": "detail/v_hotel.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "jquery",
+                "underscore",
+                "public/EventEmitter.js",
+                "lib/inherit.js",
+                "detail/mod_util.js",
+                "Modules/SelectBase.js",
+                "Modules/scrollspy.js",
+                "Modules/HotelSelect.js",
+                "detail/mod_detail_big_order_other.js"
+            ],
+            "pkg": "p0"
+        },
+        "detail/flight_model/CraftType_big5.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\flight_model\\CraftType_big5.js",
+            "id": "detail/flight_model/CraftType_big5.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": -1,
+            "deps": []
+        },
+        "detail/flight_model/CraftType_gb2312.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\detail\\flight_model\\CraftType_gb2312.js",
+            "id": "detail/flight_model/CraftType_gb2312.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": -1,
+            "deps": []
+        },
+        "data/addr_data.js": {
+            "uri": "E:\\vacation\\test\\project1\\app\\src\\data\\addr_data.js",
+            "id": "data/addr_data.js",
+            "type": "js",
+            "idType": "top",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": []
+        }
+    },
+    "pkg": {
+        "p0": {
+            "uri": "E:\\vacation\\test\\project1\\app\\min\\detail\\v_detail.js",
+            "has": [
+                "jquery",
+                "underscore",
+                "detail/mod_util.js",
+                "detail/mod_detail_big_order.js",
+                "public/EventEmitter.js",
+                "Modules/HotelSelect.js",
+                "lib/inherit.js",
+                "Modules/SelectBase.js",
+                "Interface/IDetailPageOrderComponent.js",
+                "tpl/detail/hotel_room_list.html",
+                "detail/mod_detail_big_order_flight.js",
+                "detail/mod_detail_big_order_other.js",
+                "detail/mode_detail_orderbar_fix.js",
+                "detail/mod_detail_dataManager.js",
+                "tpl/detail/big_order.html",
+                "tpl/detail/order_money_contain.html",
+                "detail/mod_detail_calendar.js",
+                "public/bigcalendar.js",
+                "detail/mod_detail_needknow.js",
+                "tpl/detail/order_needknow.html",
+                "tpl/detail/visa.html",
+                "detail/v_hotel.js",
+                "Modules/scrollspy.js",
+                "detail/v_dp.js",
+                "detail/v_flight.js",
+                "style/v_detail.css",
+                "tpl/Modules/ProductPreviewManager.html",
+                "tpl/detail/special_info.html",
+                "Modules/ProductPreviewManager.js"
+            ]
+        }
+    }
+}

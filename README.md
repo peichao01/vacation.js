@@ -20,10 +20,10 @@ get help information
 ------
 `vacation -h`,`vacation init -h`,`vacation server -h`, `vacation build -h`
 
-`vacation init config`
+`vacation init -c`
 ----
 initialize a `vacation.json` file in the current-work-directory.  
-1. `vacation init config -f` force to overwrite a config file if it had exists already.
+1. `vacation init -cf` force to overwrite a config file if it had exists already.
 
 `vacation server start`
 ----
@@ -32,3 +32,33 @@ start a server for the develope purpose and point the `www` dir to the current d
 `vacation build start`
 ----
 the config file should be provided if you need to use this command.  
+
+`vacation build tpl`
+----
+transport templates. 
+
+build command have options:
+```
+  -h, --help               output usage information
+  -m, --map                write the map.json file to the $cmd_cwd dir.
+  -c, --concat             concat all modules that the $pkg module dependen-
+       cies. config the output file rule in the vacation.json
+  -t, --transport <dir>    transport and output the results to the `dir` dir.
+       `dir` relative to the $dest dir.
+  -o, --optimize           optimize/uglify the modules that transported
+       or/and concated results.
+  -C, --cssinline          inline dependency css file content to the
+       concated file.
+  -H, --Handlebars [mode]  precompile Handlebars template.
+       mode = 1, [NOT RECOMMAND] precompile and deal
+               Handlebars.compile() in modules
+       mode = 2, precompile but keep the Handlebars.compile
+       mode = 3, precompile and keep the fn, and insert a Handlebars patch
+               on top of the package file(transport or concat)
+       mode = 4, do nothing but console.log the patch
+       default to 2
+  -T, --tplonly            only use tpl(.tpl|.html) even if transported
+      tpl(.tpl.js|.html.js) exists too.
+  -w, --watch              [tpl only] watch and build templates
+
+```

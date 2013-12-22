@@ -19,7 +19,7 @@ vacation.cli = {
 	cmd_cwd: process.cwd(),
 	info: info,
 	tips: {
-		initConfig: "\n\n or you can use [\"vacation init config\"] to generate a template config file."
+		initConfig: "\n\n or you can use [\"vacation init -c\"] to generate a template config file."
 	},
 	templateConfigFilePath: pth.join(__dirname, 'vacation.json'),
 	configFilePath: configFilePath,

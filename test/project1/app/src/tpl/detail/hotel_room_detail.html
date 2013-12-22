@@ -1,0 +1,41 @@
+{{!--
+<div class="room_detail_wrap" style="display:none;">
+    <div class="room_img_wrap basefix">
+        {{#each PicUrls}}
+        <img src="{{this}}" alt="" width="75" height="75" />
+        {{/each}}
+    </div>
+    <div class="room_txt_wrap basefix">
+		{{#each ShortFields}}
+		<div title="{{this}}">{{this}}</div>
+		{{/each}}
+		{{#each LongFields}}
+		<div class="long" title="{{this}}">{{this}}</div>
+		{{/each}}
+    </div>
+    <a class="flod_btn" href="javascript:void(0);">这里是汉字<b></b></a>
+</div>
+--}}
+<div class="room_detail_wrap" style="display:none;">
+	<div class="room_img_wrap basefix">
+		{{#notEmpty}}
+		{{#each RoomPicUrl}}
+		<img src="{{this}}" alt="" width="75" height="75">
+		{{/each}}
+		{{/notEmpty}}
+	</div>
+	<div class="room_txt_wrap basefix">
+		<div title="{{AreaRange}}">{{AreaRange}}</div>
+		<div title="{{FloorRange}}">{{FloorRange}}</div>
+		<div title="{{BedWidth}}">{{BedWidth}}</div>
+		<div title="{{AddBedFee}}">{{AddBedFee}}</div>
+		<div title="{{Smoke}}">{{Smoke}}</div>
+		<div title="这里是汉字：3这里是汉字">这里是汉字：3这里是汉字</div>
+		<div class="long" title="这里是汉字：这里是汉字。（120这里是汉字/这里是汉字，60/这里是汉字）">这里是汉字：这里是汉字。（120这里是汉字/这里是汉字，60/这里是汉字）</div>
+		<div class="long" title="这里是汉字：这里是汉字、这里是汉字、这里是汉字">这里是汉字：这里是汉字、这里是汉字、这里是汉字</div>
+		<div class="long" title="这里是汉字/这里是汉字：这里是汉字、这里是汉字">这里是汉字/这里是汉字：这里是汉字、这里是汉字</div>
+		<div class="long" title="这里是汉字：这里是汉字">这里是汉字：这里是汉字</div>
+		<div class="long" title="这里是汉字：24这里是汉字、这里是汉字、这里是汉字、这里是汉字">这里是汉字：24这里是汉字、这里是汉字、这里是汉字、这里是汉字</div>
+	</div>
+	<a class="flod_btn" href="javascript:void(0);">这里是汉字<b></b></a>
+</div>

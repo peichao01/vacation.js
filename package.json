@@ -1,6 +1,6 @@
 {
   "name": "vacation",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "chao2",
     "email": "i@peichao01.com"
@@ -30,6 +30,7 @@
     "commander":"~2.1.0",
     "walk":"2.x",
     "uglify-js":"~2.2.5",
-    "node-watch":"~0.3.4"
+    "node-watch":"~0.3.4",
+    "handlebars":"~1.1.2"
   }
 }

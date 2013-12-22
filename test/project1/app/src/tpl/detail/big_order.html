@@ -1,0 +1,382 @@
+<ul class="resource_price_wrap basefix"> 
+	<li class="start_date"> 
+		<label for="">这里是汉字</label>
+		<div class="input_wrap">
+			<input type="text" id="js-departure-date" value="{{#if BaseInfo.DepartureDate}} {{#dtdate BaseInfo.DepartureDate}}{{/dtdate}}（{{#week BaseInfo.DepartureDate}}{{/week}}）
+			{{#is BaseInfo.PriceAdult '!==' undefined}}
+				&nbsp;&nbsp;&nbsp;&yen;{{BaseInfo.PriceAdult}}/这里是汉字
+				&nbsp;&nbsp;&nbsp;&yen;{{BaseInfo.PriceChild}}/这里是汉字
+			{{/is}}{{/if}}" />
+			<b></b>
+		</div> 
+		<span data-role="jmp" data-params="{options:{type:'jmp_table',classNames:{boxType:'jmp_table'},template:'#jmp_pkg_title', content:{txt0:'这里是汉字',txt1:'这里是汉字2-12这里是汉字，这里是汉字，这里是汉字、这里是汉字、这里是汉字。'},css:{maxWidth:'300',minWidth:'240'},alignTo:'cursor'}}" class="children_price"><i></i>这里是汉字</span>
+	</li>
+	<li class="tourist_num">
+		<label for="">这里是汉字</label>
+		<div class="input_wrap">
+			<input type="text" value="{{#is BaseInfo.AdultNum '!==' undefined}}{{BaseInfo.AdultNum}}{{/is}}" />
+			<b></b>
+			<p style="display:none">
+				{{#eachx "null" 1 10}}
+				<a href="javascript:void(0);">{{$index}}</a>
+				{{/eachx}}
+			</p>
+		</div>
+	</li>
+	<li class="children_num">
+		{{#if BaseInfo.ForChild}}
+		<label for="">这里是汉字<span>(2-12这里是汉字)</span></label>
+		<div class="input_wrap">
+			<input type="text" value="{{#is BaseInfo.ChildNum '!==' undefined}}{{BaseInfo.ChildNum}}{{/is}}" />
+			<b></b>
+			<p style="display:none">
+				{{#eachx "null" 0 10}}
+				<a href="javascript:void(0);">{{$index}}</a>
+				{{/eachx}}
+			</p>
+		</div>
+		{{else}}
+		<label for="">这里是汉字<span>(这里是汉字)</span></label>
+		{{/if}}
+	</li>
+	<li class="total_price">
+		<span class="price_name">这里是汉字</span>
+		<span class="price">{{#if isFetchSuccess }}{{#moneyHTML BaseInfo.TotalPrice}}{{/moneyHTML}}{{else}}--{{/if}}</span>
+		<a id="js-submit" class="{{#if isFetchSuccess }}btn_red_big{{else}}btn_big_disabled{{/if}}" href="javascript:void(0);">{{#if isFetching }}{{#if isOrdering}}这里是汉字...{{else}}这里是汉字...{{/if}}{{else}}这里是汉字{{/if}}</a>
+	</li>
+</ul>
+<div class="all_resource">
+	{{#if isFetchSuccess}}
+	<div class="flt_htl_resource basefix">
+		<h3 class="resource_title">
+			这里是汉字<i class="icon_b icon_b_05"></i>
+		</h3>
+		{{#if FlightInfos.length}}
+		<div class="flt_resource_detail" id="js-flight-wrap">
+			<h4 class="resource_detail_title">这里是汉字</h4>
+			
+			<table class="flt_resource_table">
+				<tbody>
+					{{#each FlightInfosDealed}}
+					<tr{{#if CSSHasBorder}} class="border"{{/if}} data-segment-number="{{TripSegmentNo}}">
+						<td class="col_01">
+							{{DepartDate}}{{#if DarkMorning}}<span data-role="jmp" data-params="{options:{type:'jmp_title',classNames:{boxType:'jmp_title'},template:'#jmp_pkg_title', content:{txt0:'{{DarkMorning}}'},css:{maxWidth:'300',minWidth:'240'},alignTo:'cursor',showArrow:false}}" class="special_flt">这里是汉字</span>{{/if}}
+						</td>
+						<td class="col_02">
+							<div>
+								<strong class="time">{{DepartTime}}</strong>{{DepartCityName}}（{{DepartAirportName}}）
+							</div>
+							<div>
+								<strong class="time">{{ArriveTime}}</strong>{{ArriveCityName}}（{{ArriveAirportName}}）
+								{{#is NextDay '>' 0}}
+								<span class="base_txtdiv" data-role="jmp" data-params="{options:{css:{maxWidth:'300',minWidth:'240'},type:'jmp_text',classNames:{boxType:'jmp_text'},
+									template:'#jmp_NextDay_{{TripSegmentNo}}_{{FlightNo}}',alignTo:'cursor',showArrow:false}}">这里是汉字{{NextDay}}</span>
+								<div id="jmp_NextDay_{{TripSegmentNo}}_{{FlightNo}}" style="display:none">
+									<div class="jmp_bd">这里是汉字，这里是汉字{{NextDay}}这里是汉字。这里是汉字。</div>
+								</div>
+								{{/is}}
+							</div>
+						</td>
+						<td class="col_03">
+							<div class="pubFlights_{{AirlineCode}}">{{AirlineShortName}}</div>
+							<div class="flt_num">
+								{{FlightNo}}
+								<!-- 这里是汉字 -->
+								<span data-params="{options: {boundaryShow:false,css:{maxWidth:'490'},
+								type:'jmp_table',classNames:{boxType:'jmp_table'},
+								template:'#jmp_tab',
+								content:online.getTableTips('fltDomestic_planeType.asp这里是汉字CraftType={{PlaneType}}'),
+								alignTo:'cursor'}}"
+								data-role="jmp" class="base_txtdiv">{{PlaneType}}</span>
+							</div>
+						</td>
+						<td class="col_04">{{ClassName}}</td>
+						<td class="col_05">{{JourneyTime}}</td>
+						<td class="col_06">
+							<!--这里是汉字--> 
+							{{#FlightStops}}
+							<span class="base_txtdiv" data-role="jmp" data-params="{options: {css:{maxWidth:'300'},type:'jmp_text',classNames:{boxType:'jmp_text'},
+							template:'#jmp_TransfersOrStops',content:{ txt:'{{#each Data}}<div class=jmp_bd><strong>{{Text}}</strong><p>{{Value}}</p></div>{{/each}}'},alignTo:'cursor',showArrow:false}}">{{Key}}</span>
+							{{/FlightStops}}
+							<!-- 这里是汉字 -->
+							{{#Remarks}}
+								{{! 这里是汉字 }}
+								{{#Votes}}
+										<span class="base_txtdiv">{{Value}}</span>
+								{{/Votes}}
+								{{! 这里是汉字 }}
+								{{#ChangeBack}}
+									<span class="base_txtdiv" data-role="jmp" data-params="{options: {css:{maxWidth:'300',minWidth:'240'},type:'jmp_title',
+									classNames:{boxType:'jmp_title'},template:'#jmp_ChangeBack','content':{ key:'{{Key}}',txt:'{{#Data}}<strong>{{Text}}</strong><p>{{Value}}</p>{{/Data}}'},
+									alignTo:'cursor'}}">{{Key}}</span>
+								{{/ChangeBack}}
+								{{! 这里是汉字 }}
+								{{#Limit}}
+									<span class="base_txtdiv" data-role="jmp" data-params="{options: {css:{maxWidth:'300',minWidth:'240'},type:'jmp_title',classNames:{boxType:'jmp_title'},
+									template:'#jmp_Limit','content':{ key:'{{Key}}',content:'{{Content}}',txt:'{{#Data}}<strong>{{Text}}</strong><p>{{Value}}</p>{{/Data}}'},
+									alignTo:'cursor'}}">{{Key}}</span>
+								{{/Limit}}
+								{{! 这里是汉字 }}
+								{{#ShareFlight}}
+									<span class="base_txtdiv" data-role="jmp" data-params="{options: {css:{maxWidth:'300',minWidth:'240'},type:'jmp_title',classNames:{boxType:'jmp_text'},
+									template: '#jmp_ShareFlight','content':{'txt':'<div class=jmp_bd>{{Value}}'},alignTo:'cursor'}}">{{Text}}</span>
+								{{/ShareFlight}}
+							{{/Remarks}}
+						</td>
+						{{#if HasMoreButton}}
+						<td class="col_btn" rowspan="{{MoreButtonRowSpan}}">
+							<a class="change_resource_btn" href="javascript:void(0);">这里是汉字</a>
+						</td>
+						{{/if}}
+					</tr>
+					{{#if HasTransfer}}
+					<tr>
+						<td colspan="6">
+							<div class="transfer_plane"><span><i></i>{{ArriveCityName}}（{{ArriveAirportName}}）这里是汉字&nbsp;这里是汉字：{{Duration}}</span></div>
+						</td>
+					</tr>
+					{{/if}}
+					{{/each}}
+				</tbody>
+			</table>
+			
+		</div>
+		{{/if}}
+		{{#if HotelInfos.length}}
+		<div class="htl_resource_detail" id="js-hotel-wrap">
+			<h4 class="resource_detail_title">这里是汉字</h4>
+			<table class="htl_resource_table">
+				<tbody>
+					{{#each HotelInfos}}
+					{{! 这里是汉字 }}
+					{{!#unless @index}}
+					<tr data-index-in-data="{{@index}}" data-segment-number="{{SegmentNumber}}" data-hotel-id="{{Hotel}}">
+						<td class="col_01">
+							<p class="gray">{{CityName}}（{{LiveCount}}这里是汉字）</p>
+							<p class="gray">这里是汉字&nbsp;&nbsp;{{#dtdate LiveStartDay}}{{/dtdate}}</p>
+							<p class="gray">这里是汉字&nbsp;&nbsp;{{#dtdate LiveEndDay}}{{/dtdate}}</p>
+						</td>
+						<td class="col_02">
+							<a class="htl_img" href="{{HotelUrl}}" target="_blank" title="{{HotelName}}">
+								<img src="{{LogoUrl}}" alt="" width="100" height="75">
+							</a>
+							<div class="htl_detail">
+								<h3>
+									<a href="{{HotelUrl}}" target="_blank" title="{{HotelName}}">{{HotelName}}</a>
+									{{#is StarLience 'T'}}
+									{{! 这里是汉字 }}
+									<i title="这里是汉字" class="hotel_star_{{Star}}"></i>
+									{{else}}
+									<i title="这里是汉字" class="hotel_hollow_{{Star}}"></i>
+									{{/is}}
+								</h3>
+								<p class="gray">{{Address}}</p>
+								{{> RoomList}}
+								{{#is RoomTotalCount '>' 1}}
+								<div class="flod_spread_btn">
+									<a href="javascript:void(0);">
+										这里是汉字<b class="down"></b>
+									</a>
+									<a href="javascript:void(0);" style="display:none">
+										这里是汉字<b class="up"></b>
+									</a>
+								</div>
+								{{/is}}
+							</div>
+						</td>
+						<td class="col_btn">
+							
+							<a class="change_resource_btn" href="javascript:void(0);">这里是汉字</a>
+							
+						</td>
+					</tr>
+					{{!/unless}}
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+		{{/if}}
+		<div class="other_resource_detail">
+			<table class="other_resource_table">
+				<tbody>
+					{{#each SingleResources}}
+					{{#if IsShow}}
+					<tr class="js-single" data-index-in-data="{{@index}}" data-segment-id="{{SegmentID}}" data-resource-id="{{ResourceID}}" data-category-id="{{CategoryID}}">
+						<td class="col_01">
+							<h4 class="other_product">{{{CategoryName}}}</h4>
+						</td>
+						<td class="col_02">
+							<div class="other_name">{{{Name}}}</div>
+						</td>
+						<td class="col_03">
+							{{!--这里是汉字<div><span class="other_price">{{#moneyHTML Price}}{{/moneyHTML}}</span>{{#if MarketPrice}}<span class="original_price">(<strong>{{#moneyHTML MarketPrice}}{{/moneyHTML}}</strong>)</span>{{/if}}</div>--}}
+							--
+						</td>
+						<!--这里是汉字-->
+						{{#if IsTraffic}}
+						<td class="col_04">{{#dtdate DepartureDate}}{{/dtdate}}</td>
+						{{else}}
+						<td class="col_04">--</td>
+						{{/if}}
+						<td class="col_05">
+							<div class="room_num">
+							{{!这里是汉字}}
+								<div class="num_input_wrap">
+									{{TotalCount}}
+								</div>
+								{{Unit}}
+							</div>
+						</td>
+						<td class="col_06">
+							{{!--这里是汉字<div><span class="other_price">{{#moneyHTML TotalPrice}}{{/moneyHTML}}</span></div>--}}
+							--
+						</td>
+						<td class="col_07">
+							<div class="room_selected"{{#is Count '<=' 0}} style="display:none"{{/is}}>
+								<a href="javascript:void(0);">这里是汉字</a>
+							</div>
+						</td>
+						{{#is TotalCount '>' 1}}
+						<td class="col_btn">
+							<a class="change_resource_btn" href="javascript:void(0);">这里是汉字{{{CategoryName}}}</a>
+						</td>
+						{{/is}}
+					</tr>
+					{{/if}}
+					{{/each}}
+					{{#each OptionResources}}
+					<tr{{#unless IsShow}} style="display:none"{{/unless}} class="js-optional{{#if IsBaoxian}} js-is-baoxian{{/if}}"
+					 {{#is Inventory.length 1}}data-only-date="{{#each Inventory}}{{#dtdate Date}}{{/dtdate}}{{/each}}" {{/is}}data-index-in-data="{{@index}}" data-resource-id="{{ResourceID}}" data-category-id="{{CategoryID}}">
+						<td class="col_01" rowspan="{{Rowspan}}"{{#unless IsShowTitle}} style="display:none"{{/unless}}>
+							<h4 class="other_product">{{{CategoryName}}}</h4>
+						</td>
+						<td class="col_02">
+							<div class="other_name">{{{Name}}}</div>
+						</td>
+						<td class="col_03">
+						{{! 这里是汉字 }}
+						{{#each Inventory}}
+							{{#unless @index}}
+							<div><span class="js-price other_price">{{#moneyHTML Price}}{{/moneyHTML}}{{!--#operator Price '这里是汉字' DefaultQuantity}}{{/operator--}}</span>{{#if MarketPrice}}<span class="original_price">(<strong>{{#moneyHTML MarketPrice}}{{/moneyHTML}}{{!--#operator MarketPrice '这里是汉字' DefaultQuantity}}{{/operator--}}</strong>)</span>{{/if}}</div>
+							{{/unless}}
+						{{/each}}
+						</td>
+						<td class="col_04">
+							{{#is Inventory.length '>' 1}}
+								<div class="use_date">
+									<div class="date_input_wrap">
+										{{#each Inventory}}
+										{{#unless @index}}<input type="text" value="{{#dtdate Date}}{{/dtdate}}"/>{{/unless}}
+										{{/each}}
+										<p style="display:none">
+											{{#each Inventory}}
+											<a href="javascript:void(0);">{{#dtdate Date}}{{/dtdate}}</a>
+											{{/each}}
+										</p>
+									</div>
+								</div>
+							{{else}}
+								{{!--这里是汉字 #each Inventory}}
+								{{#dtdate Date}}{{/dtdate}}
+								{{/each --}}
+								--
+							{{/is}}
+						</td>
+						<td class="col_05">
+							<div class="room_num">
+								<div class="num_input_wrap">
+								{{#each Inventory}}
+								{{#unless @index}}
+								
+									{{#is MinQuantity MaxQuantity}}
+										{{!MinQuantity -- 这里是汉字 DefaultQuantity，这里是汉字}}
+										{{DefaultQuantity}}
+									{{else}}
+										<input type="text" value="{{DefaultQuantity}}"/>
+										<b></b>
+										<p style="display:none">
+											{{#eachx 'null' MinQuantity MaxQuantity StepQuantity}}
+											<a href="javascript:void(0);">{{$index}}</a>
+											{{/eachx}}
+										</p>
+									{{/is}}
+
+								{{/unless}}
+								{{/each}}
+
+								</div>{{Unit}}
+							</div>
+						</td>
+						<td class="col_06">
+							{{! 这里是汉字}}
+							<div><span class="other_price js-total-price">{{#if TotalPrice}}{{#moneyHTML TotalPrice}}{{/moneyHTML}}</span>{{else}}--{{/if}}</div>
+						</td>
+						<td class="col_07">
+							{{#each Inventory}}
+							{{#unless @index}}
+
+							<div class="room_selected"{{#is DefaultQuantity '<=' 0}} style="display:none;"{{/is}}>
+								<a href="javascript:void(0);">这里是汉字</a>
+							</div>
+
+							{{/unless}}
+							{{/each}}
+						</td>
+						{{! 这里是汉字 }}
+						<td class="col_btn" rowspan="{{Rowspan}}"{{#unless IsShowTitle}} style="display:none"{{/unless}}>
+							{{#if IsBaoxian}}
+							{{#is ThisCategoryTotalCount '>' 1}}
+							<a class="change_resource_btn" href="javascript:void(0);">这里是汉字{{CategoryName}}</a>
+							{{/is}}
+							{{/if}}
+						</td>
+					</tr>
+					{{#if Introduction}}
+					<tr class="js-intro" style="display:none">
+						<td></td>
+						<td colspan="5">
+							<div class="other_product_detail">
+								<b></b>
+								<i></i>
+								<div>{{Introduction}}</div>
+								<a class="flod_btn" href="javascript:void(0);">这里是汉字</a>
+							</div>
+						</td>
+						<td></td>
+					</tr>
+					{{/if}}
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{{else}}{{#if isFetching}}
+	{{#if isOrdering}}
+	<div class="c_loading detail_loading"><strong>这里是汉字，这里是汉字</strong></div>
+	{{else}}
+	<div class="c_loading detail_loading"><strong>这里是汉字，这里是汉字</strong></div>
+	{{/if}}
+{{else}}{{#if isFetchFail}}
+	{{#if errmsg}}
+	<div class="no_resource_txt">{{errmsg}}</div>
+	{{else}}
+	{{#if isServerError}}
+	<div class="no_resource_txt">这里是汉字，这里是汉字，这里是汉字。</div>
+	{{else}}
+	<div class="no_resource_txt">这里是汉字，这里是汉字，这里是汉字。</div>
+	{{/if}}
+	{{/if}}
+{{/if}}{{/if}}{{/if}}
+
+</div>
+<div id="jmp_pkg_title" style="display:none;">
+	<div class="jmp_bd flt_jmp">
+		<strong>${txt0}</strong>
+		<p>${txt1}</p>
+	</div> 
+</div>
+<div id="jmp_single_title" style="display:none;">
+  <div class="jmp_bd">
+	<p>${txt}</p>
+  </div>
+</div>

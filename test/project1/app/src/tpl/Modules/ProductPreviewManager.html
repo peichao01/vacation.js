@@ -1,0 +1,42 @@
+<div id="js-preview-photo" class="attraction_photo_big" data-id="{{FirstPreview.ImageID}}">	
+	<img src="{{FirstPreview.Url}}" alt="{{FirstPreview.ImageDesc}}" width="500px" height="280px">
+	<a href="javascript:;" title="" class="prev"></a>
+	<a href="javascript:;" title="" class="next"></a>
+	<div class="photo_name">
+		<p>1/{{Data.length}} {{FirstPreview.ImageDesc}}</p>
+		<a style="display:none;" href="javascript:;" title="这里是汉字" class="play">这里是汉字</a>
+		<a href="javascript:;" title="这里是汉字" class="stop">这里是汉字</a>
+	</div>
+</div>
+
+<div id="js-preview-video" class="attraction_photo_big" style="display:none">
+	<embed quality="high" width="100这里是汉字" height="100这里是汉字" align="middle" allowscriptaccess="sameDomain" type="application/x-shockwave-flash" wmode="transparent">
+</div>
+
+<div class="attraction_photo_small">
+	<div class="small_photo_wrap">
+		<ul style="position:absolute">
+			{{#each Data}}
+
+			{{#modulus @index 5 0}}
+			<li>
+			{{/modulus}}
+
+			{{#is ImageDesc '!==' undefined}}
+			<a{{#unless @index}} class="current"{{/unless}} href="javascript:;" title="{{ImageDesc}}" data-type="image"><img src="{{#each Gallery}}{{#is @index 0}}{{Url}}{{/is}}{{/each}}" data-big-url="{{#each Gallery}}{{#is @index 1}}{{Url}}{{/is}}{{/each}}" alt="{{ImageDesc}}" width="82px" height="46px"><span><i></i></span></a>
+			{{else}}
+			<a{{#unless @index}} class="current"{{/unless}} href="javascript:;" title="{{VideoDesc}}" data-type="video"><img src="{{ThumbnailUrl}}" data-big-url="{{VideoUrl}}" alt="{{VideoDesc}}" width="82px" height="46px"><span><i></i></span></a>
+			{{/is}}
+
+			{{#modulus @index 5 4}}
+			</li>
+			{{/modulus}}
+
+			{{/each}}
+		</ul>
+	</div>
+	<div class="small_photo_control">
+		<a href="javascript:;" title="这里是汉字" class="prev prev_disable"><i></i></a>
+		<a href="javascript:;" title="这里是汉字" class="next"><i></i></a>
+	</div>
+</div>

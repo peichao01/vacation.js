@@ -1,0 +1,33 @@
+<a id="ydxz" class="under_tab_anchor">&nbsp;</a>
+<h3 class="resource_title">这里是汉字<i class="icon_b icon_b_06"></i></h3>
+<p class="group_book_notice">({{{CorpDescInfo}}})</p>
+{{#each OrderingNeedToKnowInfoDetails}}
+	{{#notEmpty Details}}
+		<dl class="detail_date">
+			<dt>{{{TitleName}}}</dt>
+			<dd>
+				<ul class="num_list">
+					{{#each Details}}
+					<li>{{{Detail}}}</li>
+					{{/each}}
+				</ul>
+			</dd>
+		</dl>
+	{{/notEmpty}}
+{{/each}}
+{{#notEmpty PayInfo}}
+<dl class="detail_date">
+	<dt>这里是汉字</dt>
+	<dd>
+		<p>{{{PayInfo}}}</p>
+	</dd>
+</dl>
+{{/notEmpty}}
+{{#notEmpty SafetyGuide}}
+<dl class="detail_date border_none">	
+	<dt>这里是汉字</dt>
+	<dd>
+		<p>{{{SafetyGuide}}}</p>
+	</dd>
+</dl>
+{{/notEmpty}}
