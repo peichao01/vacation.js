@@ -16,9 +16,16 @@
 		"ignore":[
 			["^vacation.json"],
 			["^map.json"],
-			["\\.md$"]
+			["\\.md$"],
+			["(^|\\/)\\."]
 		],
-		"availableType":["js","css","html"]
+		"availableType":["js","css","html"],
+		"uglify":{
+			"banner":"/*! lastmodify: $$today('yyyy-mm-dd HH:MM:ss') */\\n",
+			"mangle":{
+				"except":["$","require","exports","module"]
+			}
+		}
 	},
 	"server":{
 		"port":8181,
