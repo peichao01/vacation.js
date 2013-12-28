@@ -5,8 +5,21 @@
 		"base":"./app/src",
 		"pkg":[
 			{
-				"name":["v_detail\\.js$"],
-				"rule":"$1.js"
+				"main":["v_detail\\.js$"],
+				"dest_rule":"$1.js",
+				"sub":[
+					{
+						"dest_rule":"$1_$2_$pkg.js",
+						"contain":[
+							["module_a\\.js"],
+							["module_b\\.js"]
+						]
+					}
+				],
+				"except":[
+					["\\bjquery"],
+					["\\bunderscore"]
+				]
 			}
 		],
 		"paths":{

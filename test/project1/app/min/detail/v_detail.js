@@ -1,4 +1,4 @@
-/*! lastmodify: 2013-12-23 23:44:03 */
+/*! lastmodify: 2013-12-28 15:45:03 */
 ;define("jquery",[],function(require,exports,module){module.exports=function(){}});
 ;define("underscore",[],function(require,exports,module){module.exports=function(){}});
 ;define("detail/mod_util.js",["underscore","jquery"],function(require,exports){require("../../../lib/underscore.js"),require("jquery");var e=function(){};exports.data={get:e,set:e},exports.int=e,exports.getMoneyHtml=e,exports.extendDeep=e,exports.getWeekday=e,exports.isSameDay=e,exports.decimal=e,exports.dtdate=e,exports.onResize=e,exports.onScroll=e,exports.onDocClick=e,exports.onDocKeyup=e});

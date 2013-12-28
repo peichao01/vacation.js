@@ -38,6 +38,13 @@ exports.register = function (commander) {
 				+ 		'\n\t\t on top of the package file(transport or concat)'
 				+ '\n\t mode = 4, do nothing but console.log the patch'
 				+ '\n\t default to 0', 0)
+		.option('-l, --log <mark>', 'what info to log when building.split by comma","'
+				+ '\n\t c  - which module was concated when --concat'
+				+ '\n\t nc - which module was not concated when --concat'
+				+ '\n\t i  - which module was ignored'
+				+ '\n\t t  - which module was transported'
+				+ '\n\t nt  - which module was not transported'
+				+ '\n\t r  - remote module founded in the process')
 		.option('-T, --tplonly', 'only use tpl(.tpl|.html) even if transported '
 				+ '\n\ttpl(.tpl.js|.html.js) exists too.')
 		.option('-w, --watch', '[tpl only] watch and build templates')
@@ -46,6 +53,8 @@ exports.register = function (commander) {
 			var options = args.pop();
 			var cmd = args.shift();
 			var conf = vacation.cli.config.build;
+
+			var log = options.log = dealOptionLog(options.log);
 
 			////////////////////////////////////////////////
 			// options.Handlebars == 4 特殊对待
@@ -86,8 +95,8 @@ exports.register = function (commander) {
 				buildKernel.check_alias_topDir_conflict();
 				// deal all the files in the first time
 				buildKernel.dealAllFiles({
-					isConsoleIgnored: cmd === COMMAND.START,
-					callback: function(){
+					log: log
+					, callback: function(){
 
 						if(cmd === COMMAND.START){
 							// deal module dependencies
@@ -105,7 +114,8 @@ exports.register = function (commander) {
 									isOptimize: options.optimize,
 									transportDir: options.transport,
 									isTplonly: options.tplonly,
-									HandlebarsMode: options.Handlebars
+									HandlebarsMode: options.Handlebars,
+									log: log
 								});
 							}
 							// concat
@@ -115,7 +125,8 @@ exports.register = function (commander) {
 									isCssInline: options.cssinline,
 									isWriteMap: options.map,
 									isTplonly: options.tplonly,
-									HandlebarsMode: options.Handlebars
+									HandlebarsMode: options.Handlebars,
+									log: log
 								});
 							}
 						}
@@ -125,7 +136,8 @@ exports.register = function (commander) {
 							//console.log(options.transport);
 							buildKernel.TPLBuild({
 								isOptimize: options.optimize,
-								isWatch: options.watch
+								isWatch: options.watch,
+								log: log
 							});
 						}
 					}
@@ -139,4 +151,19 @@ exports.register = function (commander) {
 	commander
 		.command(COMMAND.TPL)
 		.description('build templates');
+};
+
+function dealOptionLog(option){
+	if(option){
+		option = option.split(',');
+		return {
+			concat: option.indexOf('c') >= 0,
+			not_concat: option.indexOf('nc') >= 0,
+			ignore: option.indexOf('i') >= 0,
+			transport: option.indexOf('t') >=0,
+			not_transport: option.indexOf('nt') >=0,
+			remote_module: option.indexOf('r') >= 0
+		}
+	}
+	return option;
 }

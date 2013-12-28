@@ -6,8 +6,21 @@
 		"www":"./",
 		"pkg":[
 			{
-				"name":["main\\.js$"],
-				"rule":"$1_$2_combo.js"
+				"main":["main\\.js$"],
+				"dest_rule":"$1_$pkg_combo.js",
+				"sub":[
+					{
+						"dest_rule":"$1_$2_$pkg.js",
+						"contain":[
+							["module_a\\.js"],
+							["module_b\\.js"]
+						]
+					}
+				],
+				"except":[
+					["\\bjquery"],
+					["\\bunderscore"]
+				]
 			}
 		],
 		"paths":{},
