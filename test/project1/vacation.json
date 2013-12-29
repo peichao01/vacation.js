@@ -11,8 +11,7 @@
 					{
 						"dest_rule":"$1_$2_$pkg.js",
 						"contain":[
-							["module_a\\.js"],
-							["module_b\\.js"]
+							["\\bmod_[a-zA-Z_]+\\.js"]
 						]
 					}
 				],
