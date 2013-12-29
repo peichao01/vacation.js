@@ -9,7 +9,7 @@
 				"dest_rule":"$1.js",
 				"sub":[
 					{
-						"dest_rule":"$1_$2_$pkg.js",
+						"dest_rule":"$pkg.js",
 						"contain":[
 							["\\bmod_[a-zA-Z_]+\\.js"]
 						]

@@ -8,6 +8,7 @@
 var pth = require('path');
 var buildKernel = require('./lib/lib-build/build-kernel.js');
 var buildUtil = require('./lib/lib-build/util.js');
+var resourceManager = require('./lib/lib-build/resource_manager.js');
 
 exports.name = 'build';
 exports.usage = '<command> [options]';
@@ -91,12 +92,15 @@ exports.register = function (commander) {
 			else{
 				// replace the alias with the paths value
 				buildKernel.getPathedAlias(conf);
+				resourceManager.setField('pathedAlias', conf.real_alias_rootPathed);
+
 				// check alias & paths & base-child-dir name conflict
 				buildKernel.check_alias_topDir_conflict();
 				// deal all the files in the first time
 				buildKernel.dealAllFiles({
 					log: log
 					, callback: function(){
+						var r = resourceManager.getResource();
 
 						if(cmd === COMMAND.START){
 							// deal module dependencies

@@ -1,0 +1,108 @@
+{
+    "res": {
+        "page/index.js": {
+            "uri": "Z:\\vacation\\test\\project3\\resource\\src\\script\\page\\index.js",
+            "id": "page/index.js",
+            "idType": "top",
+            "type": "js",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "lib_a",
+                "module/module_a.js"
+            ],
+            "pkg": "p0"
+        },
+        "page/page_b.js": {
+            "uri": "Z:\\vacation\\test\\project3\\resource\\src\\script\\page\\page_b.js",
+            "id": "page/page_b.js",
+            "idType": "top",
+            "type": "js",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": []
+        },
+        "module/module_a.js": {
+            "uri": "Z:\\vacation\\test\\project3\\resource\\src\\script\\module\\module_a.js",
+            "id": "module/module_a.js",
+            "idType": "top",
+            "type": "js",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "lib_a",
+                "module/module_b.js",
+                "module/module_d.js"
+            ],
+            "pkg": "p0"
+        },
+        "module/module_b.js": {
+            "uri": "Z:\\vacation\\test\\project3\\resource\\src\\script\\module\\module_b.js",
+            "id": "module/module_b.js",
+            "idType": "top",
+            "type": "js",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [
+                "module/module_c.js"
+            ],
+            "pkg": "p0"
+        },
+        "module/module_d.js": {
+            "uri": "Z:\\vacation\\test\\project3\\resource\\src\\script\\module\\module_d.js",
+            "id": "module/module_d.js",
+            "idType": "top",
+            "type": "js",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "module/module_c.js": {
+            "uri": "Z:\\vacation\\test\\project3\\resource\\src\\script\\module\\module_c.js",
+            "id": "module/module_c.js",
+            "idType": "top",
+            "type": "js",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        },
+        "lib_a": {
+            "uri": "Z:\\vacation\\test\\project3\\resource\\src\\script\\lib\\lib_a.js",
+            "id": "lib_a",
+            "idType": "real_alias",
+            "type": "js",
+            "inBase": true,
+            "inSrc": true,
+            "cmd": 0,
+            "deps": [],
+            "pkg": "p0"
+        }
+    },
+    "pkg": {
+        "p0": {
+            "uri": "Z:\\vacation\\test\\project3\\resource\\dest\\script\\page\\index.js",
+            "id": "page/index.js",
+            "name": "p0",
+            "has": [
+                "lib_a",
+                "module/module_a.js",
+                "module/module_b.js",
+                "module/module_c.js",
+                "module/module_d.js",
+                "page/index.js"
+            ],
+            "type": "main"
+        }
+    },
+    "pathedAlias": {
+        "lib_a": "Z:\\vacation\\test\\project3\\resource\\src\\script\\lib\\lib_a.js"
+    }
+}

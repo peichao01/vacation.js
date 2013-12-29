@@ -1,36 +1,38 @@
 {
 	"build":{
-		"dest":"./dest",
-		"src":"./src",
-		"base":"./src",
+		"dest":"./resource/dest/script",
+		"src":"./resource/src/script",
+		"base":"./resource/src/script",
 		"www":"./",
 		"pkg":[
 			{
-				"main":["main\\.js$"],
+				"main":["index\\.js$"],
 				"dest_rule":"$1.js",
 				"sub":[
 					{
 						"dest_rule":"$pkg.js",
 						"contain":[
-							["module_a\\.js"],
-							["module_b\\.js"]
+							["\\bmodule\\b.*$"]
 						]
 					}
 				],
 				"except":[
-					["\\bjquery"],
-					["\\bunderscore"]
+					["\\blib\\b.*$"]
 				]
 			}
 		],
-		"paths":{},
-		"alias":{},
+		"paths":{
+		},
+		"alias":{
+			"lib_a":"./lib/lib_a.js"
+		},
 		"available":[],
 		"ignore":[
 			["^vacation.json"],
 			["^map.json"],
-			["\\bdest/"],
 			["\\.md$"],
+			["\\bdest/"],
+			["^index\\.html$"],
 			["(^|\\/)\\."]
 		],
 		"availableType":["js","css","html"],
