@@ -41,10 +41,10 @@ exports.register = function (commander) {
 				+ '\n\t default to 0', 0)
 		.option('-l, --log <mark>', 'what info to log when building'
 				+ '\n\t c  - which module was concated when --concat'
-				+ '\n\t nc - which module was not concated when --concat'
+				+ '\n\t C - which module was not concated when --concat'
 				+ '\n\t i  - which module was ignored'
 				+ '\n\t t  - which module was transported'
-				+ '\n\t nt  - which module was not transported'
+				+ '\n\t T  - which module was not transported'
 				+ '\n\t r  - remote module founded in the process')
 		.option('-T, --tplonly', 'only use tpl(.tpl|.html) even if transported '
 				+ '\n\ttpl(.tpl.js|.html.js) exists too.')
@@ -162,10 +162,10 @@ function dealOptionLog(option){
 		option = option.split('');
 		return {
 			concat: option.indexOf('c') >= 0,
-			not_concat: option.indexOf('nc') >= 0,
+			not_concat: option.indexOf('C') >= 0,
 			ignore: option.indexOf('i') >= 0,
 			transport: option.indexOf('t') >=0,
-			not_transport: option.indexOf('nt') >=0,
+			not_transport: option.indexOf('T') >=0,
 			remote_module: option.indexOf('r') >= 0
 		}
 	}
