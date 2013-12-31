@@ -39,7 +39,7 @@ exports.register = function (commander) {
 				+ 		'\n\t\t on top of the package file(transport or concat)'
 				+ '\n\t mode = 4, do nothing but console.log the patch'
 				+ '\n\t default to 0', 0)
-		.option('-l, --log <mark>', 'what info to log when building.split by comma","'
+		.option('-l, --log <mark>', 'what info to log when building'
 				+ '\n\t c  - which module was concated when --concat'
 				+ '\n\t nc - which module was not concated when --concat'
 				+ '\n\t i  - which module was ignored'
@@ -159,7 +159,7 @@ exports.register = function (commander) {
 
 function dealOptionLog(option){
 	if(option){
-		option = option.split(',');
+		option = option.split('');
 		return {
 			concat: option.indexOf('c') >= 0,
 			not_concat: option.indexOf('nc') >= 0,
