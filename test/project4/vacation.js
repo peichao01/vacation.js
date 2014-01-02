@@ -1,13 +1,13 @@
 module.exports = {
 	build:{
-		dest:"./dest",
+		dest:"./resource/dest",
 		// src 的作用： 根据文件到 src 的相对路径生成 发布到 dest 目录时的路径
-		src:"./src",
-		base:"./src",
+		src:"./resource/src",
+		base:"./resource/src/script",
 		www:"./",
 		pkg:[
 			{
-				main:/main\.js$/,
+				main:/page\/a\.js$/,
 				dest_rule:"$1.js",
 				sub:[
 					{
@@ -26,6 +26,14 @@ module.exports = {
 		],
 		paths:{},
 		alias:{},
+		available:[],
+		ignore:[
+			/^vacation\.json/,
+			/^map\.json/,
+			/\bdest\//,
+			/\.md$/,
+			/(^|\/)\./
+		],
 		availableType:["js","css","html"],
 		uglify:{
 			banner:"/*! lastmodify: $$today('yyyy-mm-dd HH:MM:ss') */\n",

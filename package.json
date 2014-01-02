@@ -7,7 +7,7 @@
   },
   "homepage":"https://github.com/peichao01/vacation",
   "description": "build tools for ctrip.com vacation department web front-end group",
-  "main": "vacation.js",
+  "main": "index.js",
   "bin": {
     "vacation": "./bin/vacation"
   },

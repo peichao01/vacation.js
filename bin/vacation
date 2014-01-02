@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('../vacation.js').cli.run(process.argv);
+require('../index').cli.run(process.argv);

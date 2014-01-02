@@ -25,7 +25,7 @@ exports.register = function (commander) {
 			var cmd = args.shift();
 
 			if(options.config){
-				var targetConfigFilePath = pth.resolve(vacation.cli.cmd_cwd, 'vacation.json');
+				var targetConfigFilePath = pth.resolve(vacation.cli.cmd_cwd, 'vacation.js');
 				if(fs.existsSync(targetConfigFilePath) && !options.force){
 					vacation.log.error('config file has already exists('+targetConfigFilePath+'). if you want to overwrite it, use the -f option.');
 				}
@@ -33,7 +33,7 @@ exports.register = function (commander) {
 					try{
 						var tmplConfigContent = buildUtil.readFile(vacation.cli.templateConfigFilePath);
 						buildUtil.writeFile(targetConfigFilePath, tmplConfigContent);
-						vacation.log.success('init config file succeed at: ' + targetConfigFilePath);
+						console.log('[CREATE]: ' + targetConfigFilePath);
 					}
 					catch(e){
 						vacation.log.error('init config file failed. error: ' + e.message);
@@ -49,6 +49,10 @@ exports.register = function (commander) {
 			 *  | |__script
 			 *  |__src
 			 *    |__image
+			 *    |__tpl
+			 *    | |__lib
+			 *    | |__module
+			 *    | |__page
 			 *    |__style
 			 *    | |__common
 			 *    | |__module
@@ -59,7 +63,7 @@ exports.register = function (commander) {
 			 *      |__page
 			 */
 			if(options.structure){
-				var s = {resource:{dest:{script:''},src:{image:'',style:{common:'',module:'',page:''},script:{lib:'',module:'',page:''}}}};
+				var s = {resource:{dest:{script:''},src:{image:'',tpl:{lib:'',module:'',page:''},style:{common:'',module:'',page:''},script:{lib:'',module:'',page:''}}}};
 				iterateDir(vacation.cli.cmd_cwd, s, []).forEach(function(dir){
 					vacation.util.mkdir_p(dir);
 				});
@@ -70,10 +74,6 @@ exports.register = function (commander) {
 				commander.help();
 			}
 		});
-
-	// commander
-	// 	.command('config')
-	// 	.description('create a template config file in the current dir.');
 }
 
 function iterateDir(dir, o, dirsArr){

@@ -6,9 +6,10 @@
 'use strict';
 
 var pth = require('path');
-var buildKernel = require('./lib/lib-build/build-kernel.js');
+var buildKernel = require('./lib/lib-build/kernel2.js'); //require('./lib/lib-build/build-kernel.js');
 var buildUtil = require('./lib/lib-build/util.js');
 var resourceManager = require('./lib/lib-build/resource_manager.js');
+var Module = require('./lib/lib-build/Module');
 
 exports.name = 'build';
 exports.usage = '<command> [options]';
@@ -23,9 +24,7 @@ exports.register = function (commander) {
 	commander
 		.option('-m, --map', 'write the map.json file to the $cmd_cwd dir.')
 		.option('-c, --concat', 'concat all modules that the $pkg module dependen-'
-				+ '\n\t cies. config the output file rule in the vacation.json')
-		.option('-t, --transport <dir>', 'transport and output the results to the `dir` dir. '
-				+ '\n\t `dir` relative to the $dest dir. ')
+					+ '\n\t cies. config the output file rule in the vacation.json')
 		.option('-o, --optimize', 'optimize/uglify the modules that transported '
 				+ '\n\t or/and concated results.')
 		.option('-C, --cssinline', 'inline dependency css file content to the '
@@ -53,7 +52,8 @@ exports.register = function (commander) {
 			var args = [].slice.call(arguments);
 			var options = args.pop();
 			var cmd = args.shift();
-			var conf = vacation.cli.config.build;
+			var cli = vacation.cli,
+				conf = cli.config.build;
 
 			var log = options.log = dealOptionLog(options.log);
 
@@ -67,85 +67,107 @@ exports.register = function (commander) {
 			}
 			////////////////////////////////////////////////
 
-			var configFileDir = vacation.cli.configFileDir;
-			if(!configFileDir){
-				vacation.log.error("you should provide a config file(vacation.json) if you need the build ability. see ["+vacation.cli.info.homepage+"] for more information."
+			if(!vacation.cli.isConfigFileExists){
+				vacation.log.error("you should provide a config file(" + vacation.cli.configFileName
+									+ ") if you need the build ability. see [" + vacation.cli.info.homepage
+									+ "] for more information."
 									+ vacation.cli.tips.initConfig);
 			}
 			if(!conf.dest || !conf.src || !conf.base){
 				vacation.log.error('"dest" and "src" and "base" field must be provided in the config file build object.' + vacation.cli.tips.initConfig);
 			}
-			conf.src = pth.resolve(configFileDir, conf.src);
-			conf.dest = pth.resolve(configFileDir, conf.dest);
+			conf.src = pth.resolve(cli.cmd_cwd, conf.src);
+			conf.dest = pth.resolve(cli.cmd_cwd, conf.dest);
 			if(!conf.base){
 				conf.base = conf.src;
 			}
 			else{
-				conf.base = pth.resolve(configFileDir, conf.base);
+				conf.base = pth.resolve(cli.cmd_cwd, conf.base);
 			}
-			if(conf.www) conf.www = pth.resolve(configFileDir, conf.www);
+			if(conf.www) conf.www = pth.resolve(cli.cmd_cwd, conf.www);
 
 			if(buildUtil.values(COMMAND).indexOf(cmd) < 0) {
 				commander.help();
 			}
 			// 任何命令都要先执行前几个步骤
 			else{
-				// replace the alias with the paths value
+				//// replace the alias with the paths value
 				buildKernel.getPathedAlias(conf);
-				resourceManager.setField('pathedAlias', conf.real_alias_rootPathed);
-
-				// check alias & paths & base-child-dir name conflict
-				buildKernel.check_alias_topDir_conflict();
-				// deal all the files in the first time
-				buildKernel.dealAllFiles({
-					log: log
-					, callback: function(){
-						var r = resourceManager.getResource();
-
-						if(cmd === COMMAND.START){
-							// deal module dependencies
-							buildKernel.dealDependencies();
-							// check circular reference
-							buildKernel.checkCircularReference();
-							// write the map.json file to the cmd_cwd
-							if(options.map){
-								buildKernel.writeMapFile();
+				if(cmd == COMMAND.START){
+					if(options.concat){
+						buildKernel.findPackageModules(function(pkgFileUris){
+							if(!pkgFileUris.length){
+								vacation.log.error('no package main file was found under cwd directory('+vacation.cli.cmd_cwd+').');
 							}
-
-							// transport
-							if(options.transport){
-								buildKernel.transport({
-									isOptimize: options.optimize,
-									transportDir: options.transport,
-									isTplonly: options.tplonly,
-									HandlebarsMode: options.Handlebars,
-									log: log
-								});
-							}
-							// concat
-							if(options.concat){
-								buildKernel.concatByPackage({
-									isOptimize: options.optimize,
-									isCssInline: options.cssinline,
-									isWriteMap: options.map,
-									isTplonly: options.tplonly,
-									HandlebarsMode: options.Handlebars,
-									log: log
-								});
-							}
-						}
-						// 这里不支持预编译模板
-						// 只有部署编译时才可以
-						else if(cmd == COMMAND.TPL){
-							//console.log(options.transport);
-							buildKernel.TPLBuild({
-								isOptimize: options.optimize,
-								isWatch: options.watch,
-								log: log
+							pkgFileUris.forEach(function(pkgUri){
+								var mod = Module.get(pkgUri);
 							});
-						}
+						});
 					}
-				});
+				}
+				else if(cmd == COMMAND.TPL){
+					buildKernel.TPLBuild({
+						isOptimize: options.optimize,
+						isWatch: options.watch,
+						log: log
+					});
+				}
+				//// replace the alias with the paths value
+				//buildKernel.getPathedAlias(conf);
+				//resourceManager.setField('pathedAlias', conf.real_alias_rootPathed);
+
+				//// check alias & paths & base-child-dir name conflict
+				//buildKernel.check_alias_topDir_conflict();
+				//// deal all the files in the first time
+				//buildKernel.dealAllFiles({
+				//	log: log
+				//	, callback: function(){
+				//		var r = resourceManager.getResource();
+
+				//		if(cmd === COMMAND.START){
+				//			// deal module dependencies
+				//			buildKernel.dealDependencies();
+				//			// check circular reference
+				//			buildKernel.checkCircularReference();
+				//			// write the map.json file to the cmd_cwd
+				//			if(options.map){
+				//				buildKernel.writeMapFile();
+				//			}
+
+				//			// transport
+				//			if(options.transport){
+				//				buildKernel.transport({
+				//					isOptimize: options.optimize,
+				//					transportDir: options.transport,
+				//					isTplonly: options.tplonly,
+				//					HandlebarsMode: options.Handlebars,
+				//					log: log
+				//				});
+				//			}
+				//			// concat
+				//			if(options.concat){
+				//				buildKernel.concatByPackage({
+				//					isOptimize: options.optimize,
+				//					isCssInline: options.cssinline,
+				//					isWriteMap: options.map,
+				//					isTplonly: options.tplonly,
+				//					HandlebarsMode: options.Handlebars,
+				//					log: log
+				//				});
+				//			}
+				//		}
+				//		// 这里不支持预编译模板
+				//		// 只有部署编译时才可以
+				//		else if(cmd == COMMAND.TPL){
+				//			//console.log(options.transport);
+				//			buildKernel.TPLBuild({
+				//				isOptimize: options.optimize,
+				//				isWatch: options.watch,
+				//				log: log
+				//			});
+				//		}
+				//	}
+				//});
 			}
 		});
 
