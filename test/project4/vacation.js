@@ -24,7 +24,9 @@ module.exports = {
 				]
 			}
 		],
-		paths:{},
+		paths:{
+			tpl:'../tpl'
+		},
 		alias:{},
 		available:[],
 		ignore:[

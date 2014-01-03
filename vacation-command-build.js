@@ -31,12 +31,10 @@ exports.register = function (commander) {
 				+ '\n\t concated file.')
 		.option('-H, --Handlebars [mode]', 'precompile Handlebars template.'
 				+ '\n\t mode = 0, not precompile'
-				+ '\n\t mode = 1, [NOT RECOMMAND] precompile and deal '
-				+ 		'\n\t\t Handlebars.compile() in modules'
-				+ '\n\t mode = 2, precompile but keep the Handlebars.compile'
-				+ '\n\t mode = 3, precompile and keep the fn, and insert a Handlebars patch'
-				+ 		'\n\t\t on top of the package file(transport or concat)'
-				+ '\n\t mode = 4, do nothing but console.log the patch'
+				+ '\n\t mode = 1, do nothing but console.log the patch'
+				+ '\n\t mode = 2, precompile'
+				+ '\n\t mode = 3, precompile and insert a Handlebars patch'
+				+ 		'\n\t\t on top of the main package file'
 				+ '\n\t default to 0', 0)
 		.option('-l, --log <mark>', 'what info to log when building'
 				+ '\n\t c  - which module was concated when --concat'
@@ -60,12 +58,13 @@ exports.register = function (commander) {
 			////////////////////////////////////////////////
 			// options.Handlebars == 4 特殊对待
 			options.Handlebars = buildUtil.int(options.Handlebars) || 0;
-			if(cmd === COMMAND.START && options.Handlebars == 4){
+			if(cmd === COMMAND.START && options.Handlebars == 1){
 				var patch = buildUtil.readFile(pth.resolve(__dirname,'./lib/lib-build/tpl_hb_precompile.txt'));
 				console.log(patch);
 				return;
 			}
 			////////////////////////////////////////////////
+			buildUtil.setOptions(options);
 
 			if(!vacation.cli.isConfigFileExists){
 				vacation.log.error("you should provide a config file(" + vacation.cli.configFileName
@@ -89,20 +88,22 @@ exports.register = function (commander) {
 			if(buildUtil.values(COMMAND).indexOf(cmd) < 0) {
 				commander.help();
 			}
-			// 任何命令都要先执行前几个步骤
 			else{
 				//// replace the alias with the paths value
 				buildKernel.getPathedAlias(conf);
 				if(cmd == COMMAND.START){
 					if(options.concat){
-						buildKernel.findPackageModules(function(pkgFileUris){
-							if(!pkgFileUris.length){
+						buildKernel.findPackageModules(function(bags){
+							if(!bags.length){
 								vacation.log.error('no package main file was found under cwd directory('+vacation.cli.cmd_cwd+').');
 							}
-							pkgFileUris.forEach(function(pkgUri){
-								var mod = Module.get(pkgUri);
+							bags.forEach(function(bag){
+
 							});
 						});
+					}
+					else{
+						commander.help();
 					}
 				}
 				else if(cmd == COMMAND.TPL){

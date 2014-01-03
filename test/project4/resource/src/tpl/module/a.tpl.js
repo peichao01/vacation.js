@@ -1,0 +1,1 @@
+define("tpl/module/a.tpl.js",[],"<div>{{Name}}</div>");

@@ -8,9 +8,11 @@ module.exports = {
 		pkg:[
 			{
 				main:/main\.js$/,
-				dest_rule:"$1.js",
+				// $file 文件名，$pkg 包名
+				dest_rule:"$file.js",
 				sub:[
 					{
+						// $pkg 包名，$all 所有被打包文件的名字，用下划线分割
 						dest_rule:"$pkg.js",
 						contain:[
 							/module_a\.js/,
@@ -26,7 +28,7 @@ module.exports = {
 		],
 		paths:{},
 		alias:{},
-		availableType:["js","css","html"],
+		//availableType:["js","css","html"],
 		uglify:{
 			banner:"/*! lastmodify: $$today('yyyy-mm-dd HH:MM:ss') */\n",
 			mangle:{
