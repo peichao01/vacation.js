@@ -27,9 +27,11 @@ cli.tips = {
 
 cli.configFileName = 'vacation.js';
 
-cli.templateConfigFilePath = pth.join(__dirname, cli.configFileName);
+cli.configFilePath = vacation.util.getConfigPath();
 
-cli.isConfigFileExists = vacation.util.exists(pth.resolve(cli.cmd_cwd, cli.configFileName));
+cli.configFileDir = cli.configFilePath && pth.dirname(cli.configFilePath);
+
+cli.templateConfigFilePath = pth.join(__dirname, cli.configFileName);
 
 cli.config = vacation.util.merge({
 	build: {},

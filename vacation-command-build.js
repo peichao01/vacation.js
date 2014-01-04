@@ -43,8 +43,6 @@ exports.register = function (commander) {
 				+ '\n\t t  - which module was transported'
 				+ '\n\t T  - which module was not transported'
 				+ '\n\t r  - remote module founded in the process')
-		.option('-T, --tplonly', 'only use tpl(.tpl|.html) even if transported '
-				+ '\n\ttpl(.tpl.js|.html.js) exists too.')
 		.option('-w, --watch', '[tpl only] watch and build templates')
 		.action(function(){
 			var args = [].slice.call(arguments);
@@ -59,31 +57,26 @@ exports.register = function (commander) {
 			// options.Handlebars == 4 特殊对待
 			options.Handlebars = buildUtil.int(options.Handlebars) || 0;
 			if(cmd === COMMAND.START && options.Handlebars == 1){
-				var patch = buildUtil.readFile(pth.resolve(__dirname,'./lib/lib-build/tpl_hb_precompile.txt'));
+				var patch = buildUtil.readFile(pth.resolve(__dirname,'./lib/lib-build/tpl_hb_precompile.js'));
 				console.log(patch);
 				return;
 			}
 			////////////////////////////////////////////////
 			buildUtil.setOptions(options);
 
-			if(!vacation.cli.isConfigFileExists){
+			// build 构建必须有配置文件，且配置文件中配置的相对路径必须相对一个固定的路径，
+			// 那么配置文件本身所在的目录（configFileDir）是一个最佳选择。
+			// 而命令的执行目录可以在 configFileDir 内部的任意目录内执行。
+			// 这样即保证了配置的路径能得到一个固定的解析结果，又保证了命令行执行目录的灵活性。
+			var configFileDir = vacation.cli.configFileDir;
+			if(!configFileDir){
 				vacation.log.error("you should provide a config file(" + vacation.cli.configFileName
 									+ ") if you need the build ability. see [" + vacation.cli.info.homepage
 									+ "] for more information."
 									+ vacation.cli.tips.initConfig);
 			}
-			if(!conf.dest || !conf.src || !conf.base){
-				vacation.log.error('"dest" and "src" and "base" field must be provided in the config file build object.' + vacation.cli.tips.initConfig);
-			}
-			conf.src = pth.resolve(cli.cmd_cwd, conf.src);
-			conf.dest = pth.resolve(cli.cmd_cwd, conf.dest);
-			if(!conf.base){
-				conf.base = conf.src;
-			}
-			else{
-				conf.base = pth.resolve(cli.cmd_cwd, conf.base);
-			}
-			if(conf.www) conf.www = pth.resolve(cli.cmd_cwd, conf.www);
+
+			dealConfig(conf);
 
 			if(buildUtil.values(COMMAND).indexOf(cmd) < 0) {
 				commander.help();
@@ -91,14 +84,15 @@ exports.register = function (commander) {
 			else{
 				//// replace the alias with the paths value
 				buildKernel.getPathedAlias(conf);
+				buildUtil.deal_available_ignore(conf);
 				if(cmd == COMMAND.START){
 					if(options.concat){
 						buildKernel.findPackageModules(function(bags){
 							if(!bags.length){
-								vacation.log.error('no package main file was found under cwd directory('+vacation.cli.cmd_cwd+').');
+								vacation.log.error('no package main file was found under the config file directory('+configFileDir+').');
 							}
 							bags.forEach(function(bag){
-
+								bag.writeFile();
 							});
 						});
 					}
@@ -179,6 +173,28 @@ exports.register = function (commander) {
 		.command(COMMAND.TPL)
 		.description('build templates');
 };
+
+function dealConfig(conf){
+	var configFileDir = vacation.cli.configFileDir;
+	if(!conf.dist || !conf.src || !conf.base){
+		vacation.log.error('"dist" and "src" and "base" field must be provided in the config file build object.' + vacation.cli.tips.initConfig);
+	}
+	conf.src = pth.resolve(configFileDir, conf.src);
+	conf.dist = pth.resolve(configFileDir, conf.dist);
+	if(!conf.base){
+		conf.base = conf.src;
+	}
+	else{
+		conf.base = pth.resolve(configFileDir, conf.base);
+	}
+	if(!conf.distBase){
+		conf.distBase = pth.resolve(conf.dist, pth.relative(conf.src, conf.base));
+	}
+	else{
+		conf.distBase = pth.resolve(configFileDir, conf.distBase);
+	}
+	if(conf.www) conf.www = pth.resolve(configFileDir, conf.www);
+}
 
 function dealOptionLog(option){
 	if(option){

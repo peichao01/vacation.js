@@ -25,14 +25,15 @@ exports.register = function (commander) {
 			var cmd = args.shift();
 
 			if(options.config){
-				var targetConfigFilePath = pth.resolve(vacation.cli.cmd_cwd, 'vacation.js');
+				var dir = vacation.cli.configFileDir || vacation.cli.cmd_cwd;
+				var targetConfigFilePath = pth.resolve(dir, vacation.cli.configFileName);
 				if(fs.existsSync(targetConfigFilePath) && !options.force){
 					vacation.log.error('config file has already exists('+targetConfigFilePath+'). if you want to overwrite it, use the -f option.');
 				}
 				else{
 					try{
-						var tmplConfigContent = buildUtil.readFile(vacation.cli.templateConfigFilePath);
-						buildUtil.writeFile(targetConfigFilePath, tmplConfigContent);
+						var tplConfigContent = buildUtil.readFile(vacation.cli.templateConfigFilePath);
+						buildUtil.writeFile(targetConfigFilePath, tplConfigContent);
 						console.log('[CREATE]: ' + targetConfigFilePath);
 					}
 					catch(e){
@@ -63,8 +64,8 @@ exports.register = function (commander) {
 			 *      |__page
 			 */
 			if(options.structure){
-				var s = {resource:{dest:{script:''},src:{image:'',tpl:{lib:'',module:'',page:''},style:{common:'',module:'',page:''},script:{lib:'',module:'',page:''}}}};
-				iterateDir(vacation.cli.cmd_cwd, s, []).forEach(function(dir){
+				var s = {resource:{dist:{script:''},src:{image:'',tpl:{lib:'',module:'',page:''},style:{common:'',module:'',page:''},script:{lib:'',module:'',page:''}}}};
+				iterateDir(vacation.cli.configFileDir || vacation.cli.cmd_cwd, s, []).forEach(function(dir){
 					vacation.util.mkdir_p(dir);
 				});
 			}

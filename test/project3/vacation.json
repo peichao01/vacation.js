@@ -7,10 +7,10 @@
 		"pkg":[
 			{
 				"main":["index\\.js$"],
-				"dest_rule":"$1.js",
+				"dist_rule":"$1.js",
 				"sub":[
 					{
-						"dest_rule":"$pkg.js",
+						"dist_rule":"$pkg.js",
 						"contain":[
 							["\\bmodule\\b.*$"]
 						]

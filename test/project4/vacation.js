@@ -1,6 +1,6 @@
 module.exports = {
 	build:{
-		dest:"./resource/dest",
+		dist:"./resource/dest",
 		// src 的作用： 根据文件到 src 的相对路径生成 发布到 dest 目录时的路径
 		src:"./resource/src",
 		base:"./resource/src/script",
@@ -8,32 +8,34 @@ module.exports = {
 		pkg:[
 			{
 				main:/page\/a\.js$/,
-				dest_rule:"$1.js",
+				dist_rule:"$dir/$file.js",
 				sub:[
 					{
-						dest_rule:"$pkg.js",
+						//dist_rule:"$dir/../../$pkg.js",
+						dist_rule:"$dir/../../../modules.js",
 						contain:[
-							/module_a\.js/,
-							/module_b\.js/
+							/module\/.+\.js/
 						]
 					}
 				],
 				except:[
-					/\bjquery/,
-					/\bunderscore/
+					///\blib\/a/
 				]
 			}
 		],
 		paths:{
-			tpl:'../tpl'
+			tpl:'./resource/src/tpl',
+			css:'./resource/src/style'
 		},
 		alias:{},
 		available:[],
 		ignore:[
+			// 部署目录
+			"$dist",
 			/^vacation\.json/,
 			/^map\.json/,
-			/\bdest\//,
 			/\.md$/,
+			// linux 隐藏文件
 			/(^|\/)\./
 		],
 		availableType:["js","css","html"],
