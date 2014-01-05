@@ -32,7 +32,8 @@ module.exports = {
 		ignore:[
 			// 部署目录
 			"$dist",
-			/^vacation\.json/,
+			/^vacation\.js/,
+			/^index\.html/,
 			/^map\.json/,
 			/\.md$/,
 			// linux 隐藏文件

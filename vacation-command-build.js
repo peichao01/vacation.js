@@ -208,5 +208,5 @@ function dealOptionLog(option){
 			remote_module: option.indexOf('r') >= 0
 		}
 	}
-	return option;
+	return option || {};
 }
