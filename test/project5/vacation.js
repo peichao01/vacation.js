@@ -16,7 +16,7 @@ module.exports = {
 		 *  [可选参数]
 		 *  默认值是 src 的路径
 		 */
-		//base:"./resource/src",
+		base:"./resource/src/script",
 
 		/**
 		 * [可选参数]
@@ -28,6 +28,12 @@ module.exports = {
 		pkg:[
 			{
 				main:/main\.js$/,
+				type:'RequireJS',
+				/**
+				 * default: SeaJS -- 不区分大小写
+				 */
+				//type: 'RequireJS',
+
 				/**
 				 * 主包（入口模块所在的包）必须发布到 dist 目录内
 				 *
@@ -71,13 +77,17 @@ module.exports = {
 		 * 此处 paths 和 alias 的相对路径都是相对于此文件所在目录
 		 * 线上环境，如果 paths 和 alias 有相对路径，是在哪个模块被引用就根据那个模块的规则来解析，所以不推荐在线上使用相对路径
 		 */
-		paths:{},
+		paths:{
+			tpl:'./resource/src/tpl',
+			css:'./resource/src/style'
+		},
 		alias:{},
 		available:[],
 		ignore:[
 			// 部署目录
 			"$dist",
 			/^vacation\.js/,
+			/^index\.html/,
 			/^map\.json/,
 			/\.md$/,
 			// linux 隐藏文件

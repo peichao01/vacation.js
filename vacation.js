@@ -16,7 +16,7 @@ module.exports = {
 		 *  [可选参数]
 		 *  默认值是 src 的路径
 		 */
-		//base:"./resource/src",
+		base:"./resource/src/script",
 
 		/**
 		 * [可选参数]
@@ -78,6 +78,7 @@ module.exports = {
 			// 部署目录
 			"$dist",
 			/^vacation\.js/,
+			/^index\.html/,
 			/^map\.json/,
 			/\.md$/,
 			// linux 隐藏文件

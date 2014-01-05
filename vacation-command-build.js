@@ -36,6 +36,8 @@ exports.register = function (commander) {
 				+ '\n\t mode = 3, precompile and insert a Handlebars patch'
 				+ 		'\n\t\t on top of the main package file'
 				+ '\n\t default to 0', 0)
+		.option('-u, --underscore [mode]', 'precompile underscore template.'
+				+ '\n\t the args is the same to --Handlebars.')
 		.option('-l, --log <mark>', 'what info to log when building'
 				+ '\n\t c  - which module was concated when --concat'
 				+ '\n\t C - which module was not concated when --concat'
@@ -56,8 +58,10 @@ exports.register = function (commander) {
 			////////////////////////////////////////////////
 			// options.Handlebars == 4 特殊对待
 			options.Handlebars = buildUtil.int(options.Handlebars) || 0;
-			if(cmd === COMMAND.START && options.Handlebars == 1){
-				var patch = buildUtil.readFile(pth.resolve(__dirname,'./lib/lib-build/tpl_hb_precompile.js'));
+			if(options.Handlebars && options.underscore) vacation.log.error('which template engine are you using?');
+			if(cmd === COMMAND.START && (options.Handlebars == 1 || options.underscore == 1)){
+				var tpl_patch_name = options.Handlebars ? 'tpl_hb_precompile' : 'tpl_underscore_precompile';
+				var patch = buildUtil.readFile(pth.resolve(__dirname,'./lib/lib-build/'+tpl_patch_name+'.js'));
 				console.log(patch);
 				return;
 			}
@@ -176,9 +180,6 @@ exports.register = function (commander) {
 
 function dealConfig(conf){
 	var configFileDir = vacation.cli.configFileDir;
-	if(!conf.dist || !conf.src || !conf.base){
-		vacation.log.error('"dist" and "src" and "base" field must be provided in the config file build object.' + vacation.cli.tips.initConfig);
-	}
 	conf.src = pth.resolve(configFileDir, conf.src);
 	conf.dist = pth.resolve(configFileDir, conf.dist);
 	if(!conf.base){
@@ -194,6 +195,14 @@ function dealConfig(conf){
 		conf.distBase = pth.resolve(configFileDir, conf.distBase);
 	}
 	if(conf.www) conf.www = pth.resolve(configFileDir, conf.www);
+
+	if(!conf.dist || !conf.src || !conf.base){
+		vacation.log.error('"dist" and "src" and "base" field must be provided in the config file build object.' + vacation.cli.tips.initConfig);
+	}
+
+	conf.pkg && conf.pkg.forEach(function(pkg){
+		pkg.type = (pkg.type || 'SeaJS').toLowerCase();
+	});
 }
 
 function dealOptionLog(option){
