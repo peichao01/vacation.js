@@ -1,8 +1,9 @@
-/*! lastmodify: 2014-01-05 00:18:55 */
+/*! lastmodify: 2014-01-05 17:54:16 */
 define("module/c.js",[],function(require){
 	console.log('module c');
 });;
-define("module/d.js",[],function(require){
+define("module/d.js",["non-CMD.js"],function(require){
+	require('../non-CMD');
 	console.log('module d');
 });;
 define("module/b.js",["../../../modules.js"],function(require){
