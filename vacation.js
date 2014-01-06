@@ -51,13 +51,18 @@ module.exports = {
 				 */
 				//isDir: true,
 
+				/**
+				 * default: SeaJS -- 不区分大小写
+				 */
+				//type: 'RequireJS',
+
 				main:/main\.js$/,
 				/**
 				 * 主包（入口模块所在的包）必须发布到 dist 目录内
 				 *
 				 * $pkg 包名，
 				 * $file 文件名 -- 文件夹模式的话，为匹配到的文件夹的名字
-				 * $all 所有被打包文件的名字，用下划线分割
+				 * $all 所有被打包文件的名字，用下划线分割 -- 文件夹模式的话，为所有入口文件的名字
 				 * $dir 入口模块到 src 目录的相对路径
 				 */
 				dist_rule:"$dir/$file.js",

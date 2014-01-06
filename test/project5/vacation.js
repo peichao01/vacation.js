@@ -27,7 +27,7 @@ module.exports = {
 
 		pkg:[
 			{
-				hidden: true,
+				//hidden: true,
 				/**
 				 * [可选参数]
 				 * 入口文件夹 模式
@@ -35,7 +35,7 @@ module.exports = {
 				 */
 				isDir: true,
 
-				main: /script\/page/,
+				main: /script\/page$/,
 				type: 'RequireJS',
 				dist_rule:"$dir/$file.js"
 			},
@@ -45,7 +45,7 @@ module.exports = {
 				 * [可选参数]
 				 * 临时不使用这个配置，也不必删除，只需设置 hidden
  				 */
-				//hidden: true,
+				hidden: true,
 				main:/main\.js$/,
 				/**
 				 * default: SeaJS -- 不区分大小写
@@ -91,7 +91,7 @@ module.exports = {
 				]
 			},
 			{
-				//hidden: true,
+				hidden: true,
 				main:/detail\.js$/,
 				/**
 				 * default: SeaJS -- 不区分大小写

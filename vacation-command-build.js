@@ -213,8 +213,8 @@ function dealPkg(conf){
 			pkg.sub = pkg.sub || [];
 			pkg.except = pkg.except || [];
 		});
-		conf.hasFilePkg = conf.pkg.some(function(pkg){ return !pkg.isDir }).length;
-		conf.hasDirPkg = conf.pkg.some(function(pkg){ return pkg.isDir }).length;
+		conf.pkgFile = conf.pkg.filter(function(pkg){ return !pkg.isDir });
+		conf.pkgDir = conf.pkg.filter(function(pkg){ return pkg.isDir });
 	}
 }
 
