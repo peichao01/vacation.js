@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="http://www.peichao01.com/cdn/handlebars-v1.1.2.js"></script>
+	<script src="http://www.peichao01.com/cdn/underscore.js"></script>
+	<!--<script src="http://www.peichao01.com/cdn/sea-debug.js"></script>-->
+	<script src="http://www.peichao01.com/cdn/require-2.1.9.js"></script>
+	<script>
+		;(function(){
+			var u = _;
+			if(u){
+				if(u.___vacation) return;
+				var prevTemplate = u.template;
+				u.template = function(text, data, settings){
+					if(typeof text == 'function' && text.___vacationPrecompiled) return data ? text(data) : text;
+					return prevTemplate.call(_, text, data, settings);
+				}
+				u.___vacation = true;
+			}
+		})();
+	</script>
+	<script>
+		var isSrc = true;
+		isSrc = false;
+		require.config({
+			baseUrl: isSrc ? './resource/src/script/' : './resource/dist/script/',
+			paths: {
+				tpl: isSrc ? '/resource/src/tpl' : '/resource/dist/tpl',
+				css: isSrc ? '/resource/src/css' : '/resource/dist/css',
+				jquery: 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min'
+			}
+			, alias: {
+			}
+		});
+		require(['page/detail']);
+	</script>
+</head>
+<body>
+
+</body>
+</html>

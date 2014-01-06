@@ -22,17 +22,18 @@
 	</script>
 	<script>
 		var isSrc = true;
-		//isSrc = false;
+		isSrc = false;
 		require.config({
 			baseUrl: isSrc ? './resource/src/script/' : './resource/dist/script/',
 			paths: {
-				tpl: isSrc ? '/resource/src/tpl' : '/resource/dist/tpl'
+				tpl: isSrc ? '/resource/src/tpl' : '/resource/dist/tpl',
+				css: isSrc ? '/resource/src/css' : '/resource/dist/css',
+				jquery: 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min'
 			}
 			, alias: {
 			}
 		});
 		require(['page/main']);
-		//require(['./resource/src/script/page/main']);
 	</script>
 </head>
 <body>

@@ -81,6 +81,7 @@ exports.register = function (commander) {
 			}
 
 			dealConfig(conf);
+			dealPkg(conf);
 
 			if(buildUtil.values(COMMAND).indexOf(cmd) < 0) {
 				commander.help();
@@ -203,6 +204,18 @@ function dealConfig(conf){
 	conf.pkg && conf.pkg.forEach(function(pkg){
 		pkg.type = (pkg.type || 'SeaJS').toLowerCase();
 	});
+}
+
+function dealPkg(conf){
+	if(conf.pkg){
+		conf.pkg = conf.pkg.filter(function(pkg){ return !pkg.hidden });
+		conf.pkg.forEach(function(pkg){
+			pkg.sub = pkg.sub || [];
+			pkg.except = pkg.except || [];
+		});
+		conf.hasFilePkg = conf.pkg.some(function(pkg){ return !pkg.isDir }).length;
+		conf.hasDirPkg = conf.pkg.some(function(pkg){ return pkg.isDir }).length;
+	}
 }
 
 function dealOptionLog(option){

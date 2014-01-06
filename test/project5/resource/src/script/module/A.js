@@ -1,4 +1,5 @@
 define(['tpl/module/A.tpl'],function(tplModA){
+//define(['tpl/module/A.tpl','css/module/A.css'],function(tplModA){
 
 	function A(){
 		var data_students = [

@@ -27,12 +27,30 @@ module.exports = {
 
 		pkg:[
 			{
+				hidden: true,
+				/**
+				 * [可选参数]
+				 * 入口文件夹 模式
+				 * 默认值为 false -- 即入口文件模式
+				 */
+				isDir: true,
+
+				main: /script\/page/,
+				type: 'RequireJS',
+				dist_rule:"$dir/$file.js"
+			},
+			{
+
+				/**
+				 * [可选参数]
+				 * 临时不使用这个配置，也不必删除，只需设置 hidden
+ 				 */
+				//hidden: true,
 				main:/main\.js$/,
-				type:'RequireJS',
 				/**
 				 * default: SeaJS -- 不区分大小写
 				 */
-				//type: 'RequireJS',
+				type: 'RequireJS',
 
 				/**
 				 * 主包（入口模块所在的包）必须发布到 dist 目录内
@@ -71,6 +89,24 @@ module.exports = {
 					/\bjquery/,
 					/\bunderscore/
 				]
+			},
+			{
+				//hidden: true,
+				main:/detail\.js$/,
+				/**
+				 * default: SeaJS -- 不区分大小写
+				 */
+				type: 'RequireJS',
+
+				/**
+				 * 主包（入口模块所在的包）必须发布到 dist 目录内
+				 *
+				 * $pkg 包名，
+				 * $file 文件名，
+				 * $all 所有被打包文件的名字，用下划线分割
+				 * $dir 入口模块到 src 目录的相对路径
+				 */
+				dist_rule:"$dir/$file.js"
 			}
 		],
 		/**
@@ -81,7 +117,9 @@ module.exports = {
 			tpl:'./resource/src/tpl',
 			css:'./resource/src/style'
 		},
-		alias:{},
+		alias:{
+			jquery: 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min'
+		},
 		available:[],
 		ignore:[
 			// 部署目录
