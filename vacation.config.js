@@ -126,7 +126,10 @@ module.exports = {
 		defaultFile:"index.html",
 		root:"./",
 		rootRelative:"cwd",
-		allowOrigin:""
+		allowOrigin:"",
+		onRequest: function(request, response){
+
+		}
 	},
 	contentType:{
 		json:"application/json"
