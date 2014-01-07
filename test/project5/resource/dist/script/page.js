@@ -1,4 +1,11 @@
-/*! lastmodify: 2014-01-07 00:10:43 */
+/*! lastmodify: 2014-01-07 11:02:34 */
+define("module/C",[], function(){
+	console.log('module c');
+	return 'module c';
+});;
+define("page/main_widgets/_main_top",function(){});require(['module/C'], function(modC){
+	console.log('_main_top');
+});;
 define("tpl/module/A.tpl",[],function(){
 	return "<div class=\"wrapper\">\n\
 	<ul>\n\
@@ -26,6 +33,11 @@ define("module/A",['tpl/module/A.tpl'],function(tplModA){
 
 	return A;
 });;
+define("page/main",function(){});// 首页
+require(['jquery','page/main_widgets/_main_top','module/A'], function($, _main_top, ModuleA){
+	var modA = new ModuleA();
+	console.log('page a');
+});;
 define("module/B",function(){
 	console.log('module B.');
 	return 'module B';
@@ -34,16 +46,4 @@ define("page/detail",function(){});// 详情页
 require(['./module/A', 'module/B'], function(ModA, ModB){
 	var modA = new ModA();
 	console.log('page detail');
-});;
-define("module/C",[], function(){
-	console.log('module c');
-	return 'module c';
-});;
-define("page/main_widgets/_main_top",function(){});require(['module/C'], function(modC){
-	console.log('_main_top');
-});;
-define("page/main",function(){});// 首页
-require(['jquery','page/main_widgets/_main_top','module/A'], function($, _main_top, ModuleA){
-	var modA = new ModuleA();
-	console.log('page a');
 });;

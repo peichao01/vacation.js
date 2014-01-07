@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="http://www.peichao01.com/cdn/handlebars-v1.1.2.js"></script>
+	<script src="http://www.peichao01.com/cdn/sea-debug.js"></script>
+	<script>
+		var isSrc = true;
+		isSrc = false;
+		seajs.config({
+			base: isSrc ? './resource/src/script/' : './resource/dist/script/',
+			paths: {
+				tpl: isSrc ? '/resource/src/tpl' : '/resource/dist/tpl',
+				css: isSrc ? '/resource/src/css' : '/resource/dist/css'
+			}
+			, alias: {
+			}
+		});
+		//seajs.use('page/main');
+		seajs.use('page');
+	</script>
+</head>
+<body>
+
+</body>
+</html>
