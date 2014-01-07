@@ -25,7 +25,7 @@ cli.tips = {
 	initConfig: "\n\n or you can use [\"vacation init -c\"] to generate a template config file."
 };
 
-cli.configFileName = 'vacation.js';
+cli.configFileName = 'vacation.config.js';
 
 cli.configFilePath = vacation.util.getConfigPath();
 
