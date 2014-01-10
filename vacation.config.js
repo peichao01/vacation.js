@@ -119,6 +119,9 @@ module.exports = {
 			mangle:{
 				except:["require","exports","module"]
 			}
+		},
+		onInit: function(emitter){
+
 		}
 	},
 	server:{

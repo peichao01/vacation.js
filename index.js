@@ -6,6 +6,7 @@
 'use strict';
 
 var pth = require('path');
+var EventEmitter = require('events').EventEmitter;
 var vacation = module.exports = require('./lib/vacation-kernel');
 var buildUtil = require('./lib/lib-build/util');
 
@@ -16,6 +17,8 @@ var cli = vacation.cli = {};
 cli.name = 'vacation';
 
 cli.info = buildUtil.readJSON(pth.join(__dirname, 'package.json'));
+
+cli.emitter = new EventEmitter();
 
 cli.commander = null;
 

@@ -82,6 +82,7 @@ exports.register = function (commander) {
 
 			dealConfig(conf);
 			dealPkg(conf);
+			dealEmitter(conf);
 
 			if(buildUtil.values(COMMAND).indexOf(cmd) < 0) {
 				commander.help();
@@ -215,6 +216,12 @@ function dealPkg(conf){
 		});
 		conf.pkgFile = conf.pkg.filter(function(pkg){ return !pkg.isDir });
 		conf.pkgDir = conf.pkg.filter(function(pkg){ return pkg.isDir });
+	}
+}
+
+function dealEmitter(conf){
+	if(conf.onInit){
+		conf.onInit(vacation.cli.emitter);
 	}
 }
 

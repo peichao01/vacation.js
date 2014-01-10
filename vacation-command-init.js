@@ -19,6 +19,8 @@ exports.register = function (commander) {
 		.option('-s, --structure', 'init a dir structure for a new project.')
 		.option('-c, --config', 'create a template config file in the current dir.')
 		.option('-d, --directory <dir>', 'where to initialize a project.')
+		.option('-m, --module', 'init a empty module.')
+		.option('-H, --html', 'init a empty html.')
 		.option('-f, --force', 'force to overwrite the file or directory.')
 		.action(function(){
 			var args = [].slice.call(arguments);
@@ -39,65 +41,77 @@ exports.register = function (commander) {
 				output: process.stdout
 			});
 
-			if(!options.config && !options.structure){
-				commander.help();
-				return;
+//			if(!options.config && !options.structure){
+//				commander.help();
+//				return;
+//			}
+
+			if(options.config || options.structure){
+				question_yn(rl, "do you want to initialize a project at ["+targetDir+"]", function(yes){
+					if(!yes){
+						console.log('[TIP] use the -d option to change the project directory.');
+					}
+					else{
+						if(options.config){
+							var dir = targetDir;
+							var targetConfigFilePath = pth.resolve(dir, vacation.cli.configFileName);
+							if(fs.existsSync(targetConfigFilePath) && !options.force){
+								vacation.log.error('config file has already exists('+targetConfigFilePath+'). if you want to overwrite it, use the -f option.');
+							}
+							else{
+								try{
+									var tplConfigContent = buildUtil.readFile(vacation.cli.templateConfigFilePath);
+									buildUtil.writeFile(targetConfigFilePath, tplConfigContent);
+									console.log('[CREATE]: ' + targetConfigFilePath);
+								}
+								catch(e){
+									vacation.log.error('init config file failed. error: ' + e.message);
+								}
+							}
+
+						}
+
+						/**
+						 * 结构：
+						 * __resource
+						 *  |__dest
+						 *  | |__script
+						 *  |__src
+						 *    |__image
+						 *    |__tpl
+						 *    | |__lib
+						 *    | |__module
+						 *    | |__page
+						 *    |__style
+						 *    | |__common
+						 *    | |__module
+						 *    | |__page
+						 *    |__script
+						 *      |__lib
+						 *      |__module
+						 *      |__page
+						 */
+						if(options.structure){
+
+							var s = {resource:{dist:{script:''},src:{image:'',tpl:{lib:'',module:'',page:''},style:{common:'',module:'',page:''},script:{lib:'',module:'',page:''}}}};
+							iterateDir(targetDir, s, []).forEach(function(dir){
+								vacation.util.mkdir_p(dir);
+							});
+						}
+					}
+					rl.close();
+				});
 			}
 
-			question_yn(rl, "do you want to initialize a project at ["+targetDir+"]", function(yes){
-				if(!yes){
-					console.log('[TIP] use the -d option to change the project directory.');
-				}
-				else{
-					if(options.config){
-						var dir = targetDir;
-						var targetConfigFilePath = pth.resolve(dir, vacation.cli.configFileName);
-						if(fs.existsSync(targetConfigFilePath) && !options.force){
-							vacation.log.error('config file has already exists('+targetConfigFilePath+'). if you want to overwrite it, use the -f option.');
-						}
-						else{
-							try{
-								var tplConfigContent = buildUtil.readFile(vacation.cli.templateConfigFilePath);
-								buildUtil.writeFile(targetConfigFilePath, tplConfigContent);
-								console.log('[CREATE]: ' + targetConfigFilePath);
-							}
-							catch(e){
-								vacation.log.error('init config file failed. error: ' + e.message);
-							}
-						}
+			if(options.html){
+				buildUtil.writeFile(pth.resolve(vacation.cli.cmd_cwd, 'index.html'),buildUtil.readFile(pth.resolve(__dirname, './tpl/index.html')));
+			}
 
-					}
-
-					/**
-					 * 结构：
-					 * __resource
-					 *  |__dest
-					 *  | |__script
-					 *  |__src
-					 *    |__image
-					 *    |__tpl
-					 *    | |__lib
-					 *    | |__module
-					 *    | |__page
-					 *    |__style
-					 *    | |__common
-					 *    | |__module
-					 *    | |__page
-					 *    |__script
-					 *      |__lib
-					 *      |__module
-					 *      |__page
-					 */
-					if(options.structure){
-
-						var s = {resource:{dist:{script:''},src:{image:'',tpl:{lib:'',module:'',page:''},style:{common:'',module:'',page:''},script:{lib:'',module:'',page:''}}}};
-						iterateDir(targetDir, s, []).forEach(function(dir){
-							vacation.util.mkdir_p(dir);
-						});
-					}
-				}
-				rl.close();
-			});
+			if(options.module){
+				buildUtil.writeFile(pth.resolve(vacation.cli.cmd_cwd, 'main.js'),buildUtil.readFile(pth.resolve(__dirname, './tpl/main.js')));
+				// 这里真奇怪，如果不手动退出进程，一直都不会自动退出
+				process.exit(0);
+			}
 		});
 }
 
