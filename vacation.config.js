@@ -106,10 +106,13 @@ module.exports = {
 		ignore:[
 			// 部署目录
 			"$dist",
+			// 正则是从配置文件所在目录还是匹配的
 			/^vacation\.js/,
 			/^index\.html/,
 			/^map\.json/,
 			/\.md$/,
+			// 所有 非 .js 和 .css 结尾的全部忽略
+			/^(?!.*\.(js|css)$)/,
 			// linux 隐藏文件
 			/(^|\/)\./
 		],
