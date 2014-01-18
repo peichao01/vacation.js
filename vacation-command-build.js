@@ -30,6 +30,10 @@ exports.register = function (commander) {
 		.option('-C, --cssinline', buildUtil.format_commander('inline dependency css file content to the '
 				+ 'concated file.'))
 		.option('-t, --transport', buildUtil.format_commander('transport all matched files.'))
+		.option('-T, --moduleType [seajs]', buildUtil.format_commander('what type is using for the --file or --multifiles option.\n'
+				+ '[s]  - seajs\n'
+				+ '[r]  - requirejs\n'
+				+ '@default seajs'), 'seajs')
 		// 实质是在 配置文件中快速添加了一个 pkg 配置，并且默认会先删除 配置文件中所有的 pkg
 		.option('-f, --file <RegExp>', buildUtil.format_commander('one or more files that need to deal. will prompt to select.'))
 		.option('-F, --multifiles <RegExp>', buildUtil.format_commander('multi files that need to deal.'))
@@ -41,7 +45,7 @@ exports.register = function (commander) {
 				+ '[all]   - all pkgs in the config file.\n'
 				+ '[null]  - none pkgs in the config file.\n'
 				+ '@default to "all" if --file not used.\n'
-				+ '@default to "null" if --file was used.\n'))
+				+ '@default to "null" if --file was used.'))
 		.option('-H, --Handlebars [mode]', buildUtil.format_commander('precompile Handlebars template.\n'
 				+ 'mode = 0, not precompile\n'
 				+ 'mode = 1, do nothing but console.log the patch\n'
@@ -161,6 +165,7 @@ exports.register = function (commander) {
 
 function dealOptions(options, conf){
 	options.log = dealOptionLog(options.log);
+	options.moduleType = (options.moduleType == 'r' || options.moduleType == 'requirejs') ? 'requirejs' : 'seajs';
 
 	var pkg, filePkg = [];
 	// 在指定 --file 的时候，---pkg 的默认值为空，即默认不使用 配置文件的 pkg 选项
@@ -168,7 +173,8 @@ function dealOptions(options, conf){
 		pkg = options.pkg || "null";
 		var p = {
 			main:RegExp(options.file || options.multifiles),
-			dist_rule: "$dir/$file"
+			dist_rule: "$dir/$file",
+			type: options.moduleType
 		};
 		console.log('\n [DEBUG] --' + (options.file ? 'file' : 'multifiles') + ' RegExp is: ' + p.main);
 		filePkg.push(p);
