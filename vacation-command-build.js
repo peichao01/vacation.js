@@ -22,44 +22,45 @@ exports.register = function (commander) {
 	};
 
 	commander
-		.option('-m, --map', 'write the map.json file to the $cmd_cwd dir.')
-		.option('-c, --concat', 'concat all modules that the $pkg module dependen-'
-					+ '\n\t cies. config the output file rule in the vacation.json')
-		.option('-o, --optimize', 'optimize/uglify the modules that transported '
-				+ '\n\t or/and concated results.')
-		.option('-C, --cssinline', 'inline dependency css file content to the '
-				+ '\n\t concated file.')
-		.option('-t, --transport', 'transport all matched files.')
+		.option('-m, --map', buildUtil.format_commander('write the map.json file to the $cmd_cwd dir.'))
+		.option('-c, --concat', buildUtil.format_commander('concat all modules that the $pkg module '
+					+ 'dependencies. config the output file rule in the vacation.json'))
+		.option('-o, --optimize', buildUtil.format_commander('optimize/uglify the modules that transported '
+				+ 'or/and concated results.'))
+		.option('-C, --cssinline', buildUtil.format_commander('inline dependency css file content to the '
+				+ 'concated file.'))
+		.option('-t, --transport', buildUtil.format_commander('transport all matched files.'))
 		// 实质是在 配置文件中快速添加了一个 pkg 配置，并且默认会先删除 配置文件中所有的 pkg
-		.option('-f, --file <RegExp>', 'file that need to deal.')
-		// 无需使用 --dir ，只需 --file 的正则写对了即可，如："dirname/"
-		//.option('-d, --dir <RegExp>', 'directory that need to deal.')
-		.option('-p, --pkg <list>', 'which pkg to use in the config file.'
-				+ '\n\t @example -p 0,2'
-				+ '\n\t @example --pkg all'
-				+ '\n\t @example --pkg null'
-				+ '\n\t default to "all" if --file not used.'
-				+ '\n\t default to "null" if --file was used.')
-		.option('-H, --Handlebars [mode]', 'precompile Handlebars template.'
-				+ '\n\t mode = 0, not precompile'
-				+ '\n\t mode = 1, do nothing but console.log the patch'
-				+ '\n\t mode = 2, precompile'
-				+ '\n\t mode = 3, precompile and insert a Handlebars patch'
-				+ 		'\n\t\t on top of the main package file'
-				+ '\n\t default to 0', 0)
-		.option('-u, --underscore [mode]', 'precompile underscore template.'
-				+ '\n\t the args is the same to --Handlebars.')
-		.option('-l, --log <mark>', 'what info to log when building'
-				+ '\n\t @example -l c,i,T'
-				+ '\n\t @example --log t,T,r'
-				+ '\n\t c  - which module was concated when --concat'
-				+ '\n\t C  - which module was not concated when --concat'
-				+ '\n\t i  - which module was ignored'
-				+ '\n\t t  - which module was transported'
-				+ '\n\t T  - which module was not transported'
-				+ '\n\t r  - remote module founded in the process'
-				+ '\n\t W  - which file write failed.')
-		.option('-w, --watch', '[tpl only] watch and build templates')
+		.option('-f, --file <RegExp>', buildUtil.format_commander('one or more files that need to deal. will prompt to select.'))
+		.option('-F, --multifiles <RegExp>', buildUtil.format_commander('multi files that need to deal.'))
+		.option('-p, --pkg <list>', buildUtil.format_commander('which pkg to use in the config file.\n'
+				+ '@example -p 0,2\n'
+				+ '@example --pkg all\n'
+				+ '@example --pkg null\n'
+				+ '[index] - which indexes to use.\n'
+				+ '[all]   - all pkgs in the config file.\n'
+				+ '[null]  - none pkgs in the config file.\n'
+				+ '@default to "all" if --file not used.\n'
+				+ '@default to "null" if --file was used.\n'))
+		.option('-H, --Handlebars [mode]', buildUtil.format_commander('precompile Handlebars template.\n'
+				+ 'mode = 0, not precompile\n'
+				+ 'mode = 1, do nothing but console.log the patch\n'
+				+ 'mode = 2, precompile\n'
+				+ 'mode = 3, precompile and insert a Handlebars patch on top of the main package file\n'
+				+ '@default to 0', 0))
+		.option('-u, --underscore [mode]', buildUtil.format_commander('precompile underscore template.'
+				+ ' The args is the same to --Handlebars.'))
+		.option('-l, --log <mark>', buildUtil.format_commander('what info to log when building\n'
+				+ '@example -l c,i,T\n'
+				+ '@example --log t,T,r\n'
+				+ '[c]  - which module was concated when -c\n'
+				+ '[C]  - which module was not concated when -c\n'
+				+ '[i]  - which module was ignored\n'
+				+ '[t]  - which module was transported\n'
+				+ '[T]  - which module was not transported\n'
+				+ '[r]  - remote module founded in the process\n'
+				+ '[W]  - which file write failed.'))
+		.option('-w, --watch', buildUtil.format_commander('[tpl only] watch and build templates'))
 		.action(function(){
 			var args = [].slice.call(arguments);
 			var options = args.pop();
@@ -163,12 +164,14 @@ function dealOptions(options, conf){
 
 	var pkg, filePkg = [];
 	// 在指定 --file 的时候，---pkg 的默认值为空，即默认不使用 配置文件的 pkg 选项
-	if(options.file){
+	if(options.file || options.multifiles){
 		pkg = options.pkg || "null";
-		filePkg.push({
-			main:RegExp(options.file),
+		var p = {
+			main:RegExp(options.file || options.multifiles),
 			dist_rule: "$dir/$file"
-		});
+		};
+		console.log('\n [DEBUG] --' + (options.file ? 'file' : 'multifiles') + ' RegExp is: ' + p.main);
+		filePkg.push(p);
 	}
 	// 否则，默认使用 配置文件的 pkg
 	else{
