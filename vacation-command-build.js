@@ -27,6 +27,8 @@ exports.register = function (commander) {
 					+ 'dependencies. config the output file rule in the vacation.json'))
 		.option('-o, --optimize', buildUtil.format_commander('optimize/uglify the modules that transported '
 				+ 'or/and concated results.'))
+		.option('-s, --autocheckout', buildUtil.format_commander('auto checkout TFS files if need.'))
+		//.option('-S, --autocheckin', buildUtil.format_commander('auto checkin TFS files if need.'))
 		.option('-C, --cssinline', buildUtil.format_commander('inline dependency css file content to the '
 				+ 'concated file.'))
 		.option('-t, --transport', buildUtil.format_commander('transport all matched files.'))
