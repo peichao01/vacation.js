@@ -59,6 +59,7 @@ exports.register = function (commander) {
 		.option('-l, --log <mark>', buildUtil.format_commander('what info to log when building\n'
 				+ '@example -l c,i,T\n'
 				+ '@example --log t,T,r\n'
+				+ '[d]  - set log level to L_DEBUG.\n'
 				+ '[c]  - which module was concated when -c\n'
 				+ '[C]  - which module was not concated when -c\n'
 				+ '[i]  - which module was ignored\n'
@@ -175,7 +176,7 @@ function dealOptions(options, conf){
 		pkg = options.pkg || "null";
 		var p = {
 			main:RegExp(options.file || options.multifiles),
-			dist_rule: "$dir/$file",
+			dist_rule: "$dir/$file.js",
 			type: options.moduleType
 		};
 		console.log('\n [DEBUG] --' + (options.file ? 'file' : 'multifiles') + ' RegExp is: ' + p.main);
@@ -205,6 +206,11 @@ function dealOptions(options, conf){
 function dealOptionLog(option){
 	if(option){
 		option = option.split('');
+		// 设置输出级别为 DEBUG
+		if(option.indexOf('d') >= 0){
+			var log = require('./lib/lib-kernel/log');
+			log.level = log.L_DEBUG;
+		}
 		return {
 			concat: option.indexOf('c') >= 0,
 			not_concat: option.indexOf('C') >= 0,
