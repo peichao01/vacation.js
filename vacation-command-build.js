@@ -46,6 +46,7 @@ exports.register = function (commander) {
 				+ '@example --pkg all\n'
 				+ '@example --pkg null\n'
 				+ '[index] - which indexes to use.\n'
+				+ '[pkgId]  - which pkg(s) with the id to use.\n'
 				+ '[all]   - all pkgs in the config file.\n'
 				+ '[null]  - none pkgs in the config file.\n'
 				+ '@default to "all" if --file not used.\n'
@@ -77,6 +78,9 @@ exports.register = function (commander) {
 			var cli = vacation.cli,
 				conf = cli.config.build;
 
+			dealConfig(conf);
+			dealPkg(conf);
+			dealEmitter(conf);
 			dealOptions(options, conf);
 			var log = options.log;// = dealOptionLog(options.log);
 
@@ -105,10 +109,6 @@ exports.register = function (commander) {
 									+ vacation.cli.tips.initConfig);
 			}
 
-			dealConfig(conf);
-			dealPkg(conf);
-			dealEmitter(conf);
-
 			if(buildUtil.values(COMMAND).indexOf(cmd) < 0) {
 				commander.help();
 			}
@@ -120,14 +120,6 @@ exports.register = function (commander) {
 					if(!conf.pkg.length){
 						vacation.log.error('no {Array[Object]}pkg was found in the config file, or the --pkg option was set to "null"');
 					}
-					// 主要的功能主要还是 合并、transport、压缩优化 三个
-					/*if(!options.concat && !options.transport && !options.optimize){
-						var readline =require('readline');
-						var rl = readline.createInterface({
-							input: process.stdin,
-							output: process.stdout
-						});
-					}*/
 					// concat 比较特殊，需要调用 Bag 类
 					if(options.concat){
 						// 合并文件，但是不 transport 的话是没有意义的，不加ID什么的，合并之后的代码不可用
@@ -136,7 +128,7 @@ exports.register = function (commander) {
 							vacation.log.notice('automatically add the --transport option cause the concated code will error if not transport.');
 						}
 
-						buildKernel.findPackageModules(function(bags){
+						buildKernel.findPackageModules(function(bags, pkgs){
 							if(!bags.length){
 								vacation.log.error('no package main file was found under the config file directory('+configFileDir+').');
 							}
@@ -168,6 +160,68 @@ exports.register = function (commander) {
 };
 
 
+function dealConfig(conf){
+	var configFileDir = vacation.cli.configFileDir;
+	conf.src = pth.resolve(configFileDir, conf.src);
+	conf.dist = pth.resolve(configFileDir, conf.dist);
+	if(!conf.base){
+		conf.base = conf.src;
+	}
+	else{
+		conf.base = pth.resolve(configFileDir, conf.base);
+	}
+	if(!conf.distBase){
+		conf.distBase = pth.resolve(conf.dist, pth.relative(conf.src, conf.base));
+	}
+	else{
+		conf.distBase = pth.resolve(configFileDir, conf.distBase);
+	}
+	if(conf.www) conf.www = pth.resolve(configFileDir, conf.www);
+
+	if(!conf.dist || !conf.src || !conf.base){
+		vacation.log.error('"dist" and "src" and "base" field must be provided in the config file build object.' + vacation.cli.tips.initConfig);
+	}
+}
+
+function dealPkg(conf){
+	if(conf.pkg){
+		conf.pkg = conf.pkg.filter(function(pkg){ return !pkg.hidden });
+		conf.pkg.forEach(function(pkg){
+			pkg.type = (pkg.type || 'SeaJS').toLowerCase();
+			pkg.sub = pkg.sub || [];
+			pkg.except = pkg.except || [];
+		});
+	}
+
+	// conf 的所有配置都只是 pkg 的每一个包的默认配置，而pkg中的设置是个性化的覆盖默认配置的配置
+	// 处理每一项 【pkg】 的时候，都优先使用当前包的配置，没有的话，再使用 conf 的默认配置
+	var _pkg = conf.pkg || [], notCopy = ['onInit'];
+
+	delete conf.pkg;
+	_pkg.forEach(function(pkg){
+		buildUtil.each(conf, function(value, name){
+			if(notCopy.indexOf(name) >= 0) return;
+			// 将默认配置复制到 pkg 每一项中
+			if(pkg[name] === undefined) pkg[name] = value;
+		});
+	});
+	conf.pkg = _pkg;
+	conf.pkgFile = _pkg.filter(function(pkg){ return !pkg.isDir });
+	conf.pkgDir = _pkg.filter(function(pkg){ return pkg.isDir });
+//	buildUtil.setConfig('build', {
+//		pkg: _pkg,
+//		pkgFile: _pkg.filter(function(pkg){ return !pkg.isDir }),
+//		pkgDir: _pkg.filter(function(pkg){ return pkg.isDir })
+//	});
+}
+
+function dealEmitter(conf){
+	conf.onInit && conf.onInit(vacation.cli.emitter);
+	conf.pkg.forEach(function(pkg){
+		pkg.onInit && pkg.onInit(vacation.cli.emitter);
+	});
+}
+
 function dealOptions(options, conf){
 	options.log = dealOptionLog(options.log);
 	options.moduleType = (options.moduleType == 'r' || options.moduleType == 'requirejs') ? 'requirejs' : 'seajs';
@@ -197,8 +251,14 @@ function dealOptions(options, conf){
 	else{
 		pkg = pkg.split(',');
 		var r = [];
-		pkg.forEach(function(index, i){
-			r.push(conf.pkg[index]);
+		pkg.forEach(function(index_or_id, i){
+			// 优先使用 index
+			if(index_or_id.match(/^\d+$/) && index_or_id <= conf.length){
+				r.push(conf.pkg[index]);
+			}
+			else{
+				r = r.concat(conf.pkg.filter(function(pkg){ return pkg.id == index_or_id }));
+			}
 		});
 		conf.pkg = r;
 	}
@@ -225,49 +285,3 @@ function dealOptionLog(option){
 	}
 	return option || {};
 }
-
-function dealConfig(conf){
-	var configFileDir = vacation.cli.configFileDir;
-	conf.src = pth.resolve(configFileDir, conf.src);
-	conf.dist = pth.resolve(configFileDir, conf.dist);
-	if(!conf.base){
-		conf.base = conf.src;
-	}
-	else{
-		conf.base = pth.resolve(configFileDir, conf.base);
-	}
-	if(!conf.distBase){
-		conf.distBase = pth.resolve(conf.dist, pth.relative(conf.src, conf.base));
-	}
-	else{
-		conf.distBase = pth.resolve(configFileDir, conf.distBase);
-	}
-	if(conf.www) conf.www = pth.resolve(configFileDir, conf.www);
-
-	if(!conf.dist || !conf.src || !conf.base){
-		vacation.log.error('"dist" and "src" and "base" field must be provided in the config file build object.' + vacation.cli.tips.initConfig);
-	}
-
-	conf.pkg && conf.pkg.forEach(function(pkg){
-		pkg.type = (pkg.type || 'SeaJS').toLowerCase();
-	});
-}
-
-function dealPkg(conf){
-	if(conf.pkg){
-		conf.pkg = conf.pkg.filter(function(pkg){ return !pkg.hidden });
-		conf.pkg.forEach(function(pkg){
-			pkg.sub = pkg.sub || [];
-			pkg.except = pkg.except || [];
-		});
-		conf.pkgFile = conf.pkg.filter(function(pkg){ return !pkg.isDir });
-		conf.pkgDir = conf.pkg.filter(function(pkg){ return pkg.isDir });
-	}
-}
-
-function dealEmitter(conf){
-	if(conf.onInit){
-		conf.onInit(vacation.cli.emitter);
-	}
-}
-

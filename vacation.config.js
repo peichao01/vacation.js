@@ -1,4 +1,6 @@
 module.exports = {
+	// build 中 除了 pkg 之外的每一项配置，都是作为 pkg 每一项的默认配置
+	// 可以在 pkg 项中单独重置
 	build:{
 		dist:"./resource/dist",
 		/**
@@ -27,6 +29,11 @@ module.exports = {
 
 		pkg:[
 			{
+				/**
+				 * [可选参数]
+				 * 当前 pkg 的id，-p 参数可以使用 id 来指定使用某一个、几个 pkg，也可以使用 index 来指定
+				 */
+				id: 'default',
 				/**
 				 * [可选参数]
 				 * 临时不使用这个配置，也不必删除，只需设置 hidden
@@ -95,6 +102,10 @@ module.exports = {
 					/\bunderscore/
 				]
 			}
+			/*,{
+				id: 'booking',
+				main: /booking\/main.js$/
+			}*/
 		],
 		/**
 		 * 此处 paths 和 alias 的相对路径都是相对于此文件所在目录
