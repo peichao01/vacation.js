@@ -39,6 +39,8 @@ exports.register = function (commander) {
 		// 实质是在 配置文件中快速添加了一个 pkg 配置，并且默认会先删除 配置文件中所有的 pkg
 		.option('-f, --file <RegExp>', buildUtil.format_commander('one or more files that need to deal. will prompt to select.'))
 		.option('-F, --multifiles <RegExp>', buildUtil.format_commander('multi files that need to deal.'))
+		.option('-d, --distrule [rule]', buildUtil.format_commander('set the dist rule.\n'
+				+ '@default $dir/$file.js'), "$dir/$file.js")
 		.option('-p, --pkg <list>', buildUtil.format_commander('which pkg to use in the config file.\n'
 				+ '@example -p 0,2\n'
 				+ '@example --pkg all\n'
@@ -176,10 +178,10 @@ function dealOptions(options, conf){
 		pkg = options.pkg || "null";
 		var p = {
 			main:RegExp(options.file || options.multifiles),
-			dist_rule: "$dir/$file.js",
+			dist_rule: options.distrule,//"$dir/$file.js",
 			type: options.moduleType
 		};
-		console.log('\n [DEBUG] --' + (options.file ? 'file' : 'multifiles') + ' RegExp is: ' + p.main);
+		vacation.log.debug('--' + (options.file ? 'file' : 'multifiles') + ' RegExp is: ' + p.main);
 		filePkg.push(p);
 	}
 	// 否则，默认使用 配置文件的 pkg
