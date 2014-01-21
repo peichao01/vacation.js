@@ -113,9 +113,6 @@ exports.register = function (commander) {
 				commander.help();
 			}
 			else{
-				//// replace the alias with the paths value
-				buildKernel.getPathedAlias(conf);
-				buildUtil.deal_available_ignore(conf);
 				if(cmd == COMMAND.START){
 					if(!conf.pkg.length){
 						vacation.log.error('no {Array[Object]}pkg was found in the config file, or the --pkg option was set to "null"');
@@ -181,6 +178,10 @@ function dealConfig(conf){
 	if(!conf.dist || !conf.src || !conf.base){
 		vacation.log.error('"dist" and "src" and "base" field must be provided in the config file build object.' + vacation.cli.tips.initConfig);
 	}
+
+	//// replace the alias with the paths value
+	buildUtil.getPathedAlias(conf);
+	buildUtil.deal_available_ignore(conf);
 }
 
 function dealPkg(conf){
@@ -253,8 +254,8 @@ function dealOptions(options, conf){
 		var r = [];
 		pkg.forEach(function(index_or_id, i){
 			// 优先使用 index
-			if(index_or_id.match(/^\d+$/) && index_or_id <= conf.length){
-				r.push(conf.pkg[index]);
+			if(index_or_id.match(/^\d+$/) && index_or_id < conf.pkg.length){
+				r.push(conf.pkg[index_or_id]);
 			}
 			else{
 				r = r.concat(conf.pkg.filter(function(pkg){ return pkg.id == index_or_id }));
