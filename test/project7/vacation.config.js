@@ -2,7 +2,8 @@ module.exports = {
 	// build 中 除了 pkg 之外的每一项配置，都是作为 pkg 每一项的默认配置
 	// 可以在 pkg 项中单独重置
 	build:{
-		dist:"./resource/dist",
+		//dist:"./resource/dist",
+		dist:"./resource/src/script",
 		/**
 		 * [可选参数]
 		 * 部署后 base 的位置，生成 package 的 id
@@ -13,7 +14,7 @@ module.exports = {
 		/**
 		 *  src 的作用： 根据文件到 src 的相对路径生成 发布到 dist 目录时的路径
 		 */
-		src:"./resource/src",
+		src:"./resource/src/script",
 		/**
 		 *  [可选参数]
 		 *  默认值是 src 的路径
@@ -61,7 +62,7 @@ module.exports = {
 				/**
 				 * default: SeaJS -- 不区分大小写
 				 */
-				//type: 'RequireJS',
+				type: 'RequireJS',
 
 				main:/main\.js$/,
 				/**
@@ -71,15 +72,13 @@ module.exports = {
 				 * $file 文件名 -- 文件夹模式的话，为匹配到的文件夹的名字
 				 * $all 所有被打包文件的名字，用下划线分割 -- 文件夹模式的话，为所有入口文件的名字
 				 * $dir 入口模块到 src 目录的相对路径
-				 *
-				 * 如果要写相对路径，是相对于【dist】目录的
 				 */
-				dist_rule:"$dir/$file.js",
+				dist_rule:"page/main_r.js",
 				/**
 				 * [可选参数]
 				 */
 				sub:[
-					{
+					//{
 						/**
 						 * 子包可以发布到任意目录
 						 *
@@ -89,19 +88,18 @@ module.exports = {
 						 * e.g. "$dir/../$pkg.js"
 						 * e.g. "some/dir/$pkg.js"
 						 */
-						dist_rule:"$pkg.js",
-						contain:[
-							/module_a\.js/,
-							/module_b\.js/
-						]
-					}
+//						dist_rule:"$pkg.js",
+//						contain:[
+//							/module_a\.js/,
+//							/module_b\.js/
+//						]
+					//}
 				],
 				/**
 				 * [可选参数]
 				 */
 				except:[
-					/\bjquery/,
-					/\bunderscore/
+					/lib\.js$/
 				]
 			}
 			/*,{
@@ -113,27 +111,29 @@ module.exports = {
 		 * 此处 paths 和 alias 的相对路径都是相对于此文件所在目录
 		 * 线上环境，如果 paths 和 alias 有相对路径，是在哪个模块被引用就根据那个模块的规则来解析，所以不推荐在线上使用相对路径
 		 */
-		paths:{},
+		paths:{
+			'lib': './resource/src/script/lib/lib.js'
+		},
 		alias:{},
 		available:[],
 		ignore:[
 			// 部署目录
-			"$dist",
-			// 正则是从配置文件所在目录还是匹配的
-			/^vacation\.js/,
-			/^index\.html/,
-			/^map\.json/,
-			/\.md$/,
-			// 所有 非 .js 和 .css 结尾的全部忽略
-			/^(?!.*\.(js|css)$)/,
-			// linux 隐藏文件
-			/(^|\/)\./
+//			"$dist",
+//			// 正则是从配置文件所在目录还是匹配的
+//			/^vacation\.js/,
+//			/^index\.html/,
+//			/^map\.json/,
+//			/\.md$/,
+//			// 所有 非 .js 和 .css 结尾的全部忽略
+//			/^(?!.*\.(js|css)$)/,
+//			// linux 隐藏文件
+//			/(^|\/)\./
 		],
 		//availableType:["js","css","html"],
 		uglify:{
 			banner:"/*! lastmodify: $$today('yyyy-mm-dd HH:MM:ss') */\n",
 			mangle:{
-				except:["require","exports","module"]
+				//except:["require","exports","module"]
 			}
 		},
 		onInit: function(emitter){
