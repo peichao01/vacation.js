@@ -191,6 +191,7 @@ function dealPkg(conf){
 			pkg.type = (pkg.type || 'SeaJS').toLowerCase();
 			pkg.sub = pkg.sub || [];
 			pkg.except = pkg.except || [];
+			pkg.includePosition = pkg.includePosition || 'top';
 		});
 	}
 

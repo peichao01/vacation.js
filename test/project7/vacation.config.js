@@ -97,6 +97,25 @@ module.exports = {
 				],
 				/**
 				 * [可选参数]
+				 * 要额外包含哪些文件进来
+				 *
+				 * @注意：
+				 * include 匹配到的所有文件（根据options参数决定是否concat）都会被
+				 * 追加到 main 参数匹配到的每一个入口文件
+				 */
+				include: [
+					/\/view\//
+				],
+				/**
+				 * [可选参数][top|bottom]
+				 * @default top
+				 *
+				 * include 的模块放到最终输出文件的位置，默认为顶部
+				 */
+				//includePosition: 'top',
+
+				/**
+				 * [可选参数]
 				 */
 				except:[
 					/lib\.js$/
