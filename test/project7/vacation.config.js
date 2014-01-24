@@ -131,9 +131,12 @@ module.exports = {
 		 * 线上环境，如果 paths 和 alias 有相对路径，是在哪个模块被引用就根据那个模块的规则来解析，所以不推荐在线上使用相对路径
 		 */
 		paths:{
-			'lib': './resource/src/script/lib/lib.js'
+			'lib_dir': './resource/src/script/lib',
+			'tpl': './resource/src/tpl'
 		},
-		alias:{},
+		alias:{
+			lib: 'lib_dir/lib.js'
+		},
 		available:[],
 		ignore:[
 			// 部署目录

@@ -4,14 +4,15 @@
 	<title></title>
 	<script src="http://www.peichao01.com/cdn/underscore.js"></script>
 	<script src="http://www.peichao01.com/cdn/require-2.1.9.js"></script>
+	<script src="http://www.peichao01.com/cdn/require-text-2.0.10.js"></script>
 
 	<!-- 假设 lib 已经被引入到页面了 -->
 	<script src="./resource/src/script/lib/lib.js"></script>
 	<script>
 		requirejs.config({
-			baseUrl: './resource/src/script',
+			baseUrl: '/resource/src/script',
 			paths: {
-
+				'tpl': '/resource/src/tpl'
 			}
 			, alias: {
 			}
