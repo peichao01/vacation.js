@@ -112,7 +112,7 @@ module.exports = {
 				 *
 				 * include 的模块放到最终输出文件的位置，默认为顶部
 				 */
-				//includePosition: 'top',
+				includePosition: 'bottom',
 
 				/**
 				 * [可选参数]
