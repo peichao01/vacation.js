@@ -10,7 +10,7 @@ var EventEmitter = require('events').EventEmitter;
 var vacation = module.exports = require('./lib/vacation-kernel');
 var buildUtil = require('./lib/lib-build/util');
 
-var tools = ['build', 'server', 'init'];
+var tools = ['build', 'tpl', 'search', 'server', 'init'];
 
 var cli = vacation.cli = {};
 
