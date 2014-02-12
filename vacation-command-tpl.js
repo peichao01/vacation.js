@@ -22,6 +22,7 @@ exports.register = function (commander) {
 				+ 'or/and concated results.'))
 		// 实质是在 配置文件中快速添加了一个 pkg 配置，并且默认会先删除 配置文件中所有的 pkg
 		.option('-f, --file <RegExp>', buildUtil.format_commander('one or more files that need to deal.'))
+		.option('-s, --autocheckout', buildUtil.format_commander('auto checkout TFS files if need.'))
 		.option('-w, --watch', buildUtil.format_commander('watch and build templates'))
 		.action(function(){
 			var args = [].slice.call(arguments);
