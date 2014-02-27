@@ -73,9 +73,9 @@ exports.register = function (commander) {
 			var conf = cli.config.build;
 
 			fns.dealConfig(conf);
+			fns.dealOptions(options, conf);
 			fns.dealPkg(conf);
 			fns.dealEmitter(conf);
-			fns.dealOptions(options, conf);
 
 			buildUtil.setOptions(options);
 
