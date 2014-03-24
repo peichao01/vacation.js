@@ -36,6 +36,7 @@ exports.register = function (commander) {
 		.option('-F, --multifiles <RegExp>', buildUtil.format_commander('multi files that need to deal.'))
 		.option('-d, --distrule [rule]', buildUtil.format_commander('set the dist rule.\n'
 				+ '@default $dir/$file.js'), "$dir/$file.js")
+		.option('-b, --basic <basicConfigID>', buildUtil.format_commander('set the basic config id.'))
 		.option('-p, --pkg <list>', buildUtil.format_commander('which pkg to use in the config file.\n'
 				+ '@example -p 0,2\n'
 				+ '@example --pkg all\n'
@@ -74,7 +75,7 @@ exports.register = function (commander) {
 
 			fns.dealConfig(conf);
 			fns.dealOptions(options, conf);
-			fns.dealPkg(conf);
+			fns.dealPkg(options, conf);
 			fns.dealEmitter(conf);
 
 			buildUtil.setOptions(options);

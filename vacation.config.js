@@ -2,33 +2,78 @@ module.exports = {
 	// build 中 除了 pkg 之外的每一项配置，都是作为 pkg 每一项的默认配置
 	// 可以在 pkg 项中单独重置
 	build:{
-		dist:"./resource/dist",
 		/**
-		 * [可选参数]
-		 * 部署后 base 的位置，生成 package 的 id
-		 * 默认值是将 base 到 src 的相对路径映射到 dist 目录
+		 * 基础配置，公共的配置可以提取出来，然后在 pkg 中指定使用哪一个基础配置即可
 		 */
-		//distBase: './resource/dist',
+		basic: [
+			{
+				// 使用 -f 指定文件build 的时候，会默认使用id="default"的basic配置，可以使用 --basic 来指定自定义的 basic 配置
+				id: 'default',
+				dist:"./resource/dist",
+				/**
+				 * [可选参数]
+				 * 部署后 base 的位置，生成 package 的 id
+				 * 默认值是将 base 到 src 的相对路径映射到 dist 目录
+				 */
+				//distBase: './resource/dist',
 
-		/**
-		 *  src 的作用： 根据文件到 src 的相对路径生成 发布到 dist 目录时的路径
-		 */
-		src:"./resource/src",
-		/**
-		 *  [可选参数]
-		 *  默认值是 src 的路径
-		 */
-		base:"./resource/src/script",
+				/**
+				 *  src 的作用： 根据文件到 src 的相对路径生成 发布到 dist 目录时的路径
+				 */
+				src:"./resource/src",
+				/**
+				 *  [可选参数]
+				 *  默认值是 src 的路径
+				 */
+				base:"./resource/src/script",
 
-		/**
-		 * [可选参数]
-		 * 如果把路径设置为根路径，则需要这个配置
-		 * 但不推荐使用根路径的方式，因为部署后的路径映射关系很可能是不能掌控的
-		 */
-		//www:"./",
+				/**
+				 * [可选参数]
+				 * 如果把路径设置为根路径，则需要这个配置
+				 * 但不推荐使用根路径的方式，因为部署后的路径映射关系很可能是不能掌控的
+				 */
+				//www:"./",
+				/**
+				 * 此处 paths 和 alias 的相对路径都是相对于此文件所在目录
+				 * 线上环境，如果 paths 和 alias 有相对路径，是在哪个模块被引用就根据那个模块的规则来解析，所以不推荐在线上使用相对路径
+				 */
+				paths:{},
+				alias:{},
+				available:[],
+				ignore:[
+					// 部署目录
+					"$dist",
+					// 正则是从配置文件所在目录还是匹配的
+					/^vacation\.js/,
+					/^index\.html/,
+					/^map\.json/,
+					/\.md$/,
+					// 所有 非 .js 和 .css 结尾的全部忽略
+					/^(?!.*\.(js|css)$)/,
+					// linux 隐藏文件
+					/(^|\/)\./
+				],
+				//availableType:["js","css","html"],
+				uglify:{
+					banner:"/*! lastmodify: $$today('yyyy-mm-dd HH:MM:ss') */\n",
+					mangle:{
+						except:["require","exports","module"]
+					}
+				},
+				onInit: function(emitter){
+
+				}
+			},
+			{
+				id: 'non-seajs'
+				// ...
+			}
+		],
+
 
 		pkg:[
 			{
+				basic: 'default',
 				/**
 				 * [可选参数]
 				 * 当前 pkg 的id，-p 参数可以使用 id 来指定使用某一个、几个 pkg，也可以使用 index 来指定
@@ -123,41 +168,12 @@ module.exports = {
 					/\bunderscore/
 				]
 			}
-			/*,{
+			,{
+				basic: 'non-seajs',
 				id: 'booking',
 				main: /booking\/main.js$/
-			}*/
-		],
-		/**
-		 * 此处 paths 和 alias 的相对路径都是相对于此文件所在目录
-		 * 线上环境，如果 paths 和 alias 有相对路径，是在哪个模块被引用就根据那个模块的规则来解析，所以不推荐在线上使用相对路径
-		 */
-		paths:{},
-		alias:{},
-		available:[],
-		ignore:[
-			// 部署目录
-			"$dist",
-			// 正则是从配置文件所在目录还是匹配的
-			/^vacation\.js/,
-			/^index\.html/,
-			/^map\.json/,
-			/\.md$/,
-			// 所有 非 .js 和 .css 结尾的全部忽略
-			/^(?!.*\.(js|css)$)/,
-			// linux 隐藏文件
-			/(^|\/)\./
-		],
-		//availableType:["js","css","html"],
-		uglify:{
-			banner:"/*! lastmodify: $$today('yyyy-mm-dd HH:MM:ss') */\n",
-			mangle:{
-				except:["require","exports","module"]
 			}
-		},
-		onInit: function(emitter){
-
-		}
+		]
 	},
 	server:{
 		port:8181,
