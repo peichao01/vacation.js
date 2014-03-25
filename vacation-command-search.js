@@ -27,8 +27,8 @@ exports.register = function (commander) {
 				conf = cli.config.build;
 
 			fns.dealConfig(conf);
-			fns.dealPkg(conf);
-			fns.dealEmitter(conf);
 			fns.dealOptions(options, conf);
+			fns.dealPkg(options, conf);
+			fns.dealEmitter(conf);
 		});
 };

@@ -32,9 +32,9 @@ exports.register = function (commander) {
 			var conf = cli.config.build;
 
 			fns.dealConfig(conf);
-			fns.dealPkg(conf);
-			fns.dealEmitter(conf);
 			fns.dealOptions(options, conf);
+			fns.dealPkg(options, conf);
+			fns.dealEmitter(conf);
 
 			buildUtil.setOptions(options);
 
